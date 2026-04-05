@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Coratech AI — Bespoke Enterprise AI Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0d1b2e;
+  --navy2:#0a1628;
+  --blue:#1565c0;
+  --cyan:#29b6f6;
+  --cyan2:#00e5ff;
+  --white:#f0f4ff;
+  --muted:#8fa3bf;
+  --glass:rgba(255,255,255,0.05);
+  --glass2:rgba(255,255,255,0.09);
+  --border:rgba(41,182,246,0.15);
+  --accent:#00e5ff;
+  --grad:linear-gradient(135deg,#1565c0,#29b6f6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* NOISE OVERLAY */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;transition:all .4s ease;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(10,22,40,0.92);backdrop-filter:blur(20px);border-bottom-color:var(--border)}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none}
+.logo-diamond{width:36px;height:36px;position:relative}
+.logo-diamond svg{width:100%;height:100%}
+.logo-text{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:var(--white)}
+.logo-text span{color:var(--cyan)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;letter-spacing:.02em;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--cyan);transition:width .3s}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--grad);color:#fff;padding:.55rem 1.4rem;border-radius:100px;font-size:.88rem;font-weight:600;border:none;cursor:pointer;transition:all .3s;white-space:nowrap}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(21,101,192,.5)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--navy2);z-index:999;padding:100px 2rem 2rem;flex-direction:column;gap:1.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--white);text-decoration:none;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:700;padding:.5rem 0;border-bottom:1px solid var(--border)}
+
+/* PAGE SECTIONS */
+.page{display:none;animation:fadeUp .5s ease forwards}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:0 5%;padding-top:72px}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.25;animation:drift 12s ease-in-out infinite alternate}
+.hero-orb.o1{width:700px;height:700px;background:radial-gradient(circle,#1565c0,transparent);top:-200px;right:-100px;animation-delay:0s}
+.hero-orb.o2{width:500px;height:500px;background:radial-gradient(circle,#29b6f6,transparent);bottom:-100px;left:-100px;animation-delay:-5s}
+.hero-orb.o3{width:300px;height:300px;background:radial-gradient(circle,#00e5ff,transparent);top:40%;left:40%;animation-delay:-3s;opacity:.12}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,40px) scale(1.1)}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(41,182,246,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(41,182,246,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%)}
+.hero-content{position:relative;z-index:1;max-width:760px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(41,182,246,.1);border:1px solid var(--border);padding:.4rem 1rem;border-radius:100px;font-size:.82rem;color:var(--cyan);margin-bottom:2rem;letter-spacing:.05em}
+.hero-badge-dot{width:7px;height:7px;background:var(--cyan2);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,229,255,.4)}50%{box-shadow:0 0 0 6px rgba(0,229,255,0)}}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero h1 .hl{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.1rem;color:var(--muted);line-height:1.8;max-width:580px;margin-bottom:2.5rem;font-weight:300}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--grad);color:#fff;padding:.85rem 2rem;border-radius:100px;font-size:.95rem;font-weight:600;border:none;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(21,101,192,.5)}
+.btn-secondary{background:transparent;color:var(--white);padding:.85rem 2rem;border-radius:100px;font-size:.95rem;font-weight:600;border:1px solid var(--border);cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-secondary:hover{background:var(--glass2);border-color:var(--cyan);transform:translateY(-3px)}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:.82rem;color:var(--muted);letter-spacing:.05em;margin-top:.2rem}
+.hero-visual{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:420px;height:420px;z-index:1;display:none}
+@media(min-width:1100px){.hero-visual{display:block}}
+.hero-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;padding:1.5rem;animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.hc-row{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.hc-icon{width:36px;height:36px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.hc-label{font-size:.85rem;color:var(--muted)}
+.hc-value{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--white)}
+.hc-bar-wrap{background:rgba(255,255,255,.06);border-radius:100px;height:6px;margin-top:.5rem;overflow:hidden}
+.hc-bar{height:100%;border-radius:100px;background:var(--grad);animation:barFill 2s ease forwards}
+@keyframes barFill{from{width:0}to{width:var(--w)}}
+
+/* SECTIONS */
+section{padding:7rem 5%;position:relative;z-index:1}
+.section-label{font-size:.78rem;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem;font-weight:600}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:1rem}
+.section-sub{color:var(--muted);font-size:1rem;max-width:560px;line-height:1.8;margin-bottom:3.5rem;font-weight:300}
+.section-title .hl{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ROADMAP */
+.roadmap{overflow:hidden}
+.roadmap-track{display:flex;gap:0;position:relative;overflow-x:auto;padding-bottom:1rem;scrollbar-width:none}
+.roadmap-track::-webkit-scrollbar{display:none}
+.roadmap-track::before{content:'';position:absolute;top:36px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--border),var(--border),transparent);z-index:0}
+.rm-step{flex:1;min-width:180px;display:flex;flex-direction:column;align-items:center;cursor:pointer;position:relative;z-index:1;padding:0 .5rem}
+.rm-dot{width:16px;height:16px;border-radius:50%;background:var(--glass2);border:2px solid var(--border);margin-bottom:1rem;transition:all .3s;position:relative}
+.rm-dot::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid transparent;transition:.3s}
+.rm-step.active .rm-dot{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 20px var(--cyan)}
+.rm-step.active .rm-dot::after{border-color:rgba(41,182,246,.3)}
+.rm-num{font-size:.72rem;color:var(--muted);letter-spacing:.1em;margin-bottom:.4rem;font-weight:600}
+.rm-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;text-align:center;color:var(--muted);transition:.3s}
+.rm-step.active .rm-title,.rm-step:hover .rm-title{color:var(--white)}
+.rm-content{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:2.5rem;margin-top:2.5rem;backdrop-filter:blur(10px);animation:fadeUp .4s ease}
+.rm-content h3{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.75rem;color:var(--cyan)}
+.rm-content p{color:var(--muted);line-height:1.8;font-weight:300}
+
+/* SERVICES GRID */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+.svc-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:2rem;cursor:pointer;transition:all .4s;position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;inset:0;background:var(--grad);opacity:0;transition:.4s;border-radius:20px}
+.svc-card:hover{transform:translateY(-6px);border-color:var(--cyan)}
+.svc-card:hover::before{opacity:.06}
+.svc-icon{font-size:1.8rem;margin-bottom:1.2rem;display:block;position:relative;z-index:1}
+.svc-card h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.6rem;position:relative;z-index:1}
+.svc-card p{color:var(--muted);font-size:.88rem;line-height:1.7;position:relative;z-index:1;font-weight:300}
+.svc-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--cyan);font-size:.82rem;font-weight:600;margin-top:1rem;position:relative;z-index:1;cursor:pointer;transition:.2s}
+.svc-link:hover{gap:.7rem}
+
+/* CLIENTS SLIDER */
+.clients-wrap{overflow:hidden;position:relative;padding:2rem 0}
+.clients-wrap::before,.clients-wrap::after{content:'';position:absolute;top:0;bottom:0;width:150px;z-index:2}
+.clients-wrap::before{left:0;background:linear-gradient(90deg,var(--navy),transparent)}
+.clients-wrap::after{right:0;background:linear-gradient(-90deg,var(--navy),transparent)}
+.clients-track{display:flex;gap:3rem;animation:slide 25s linear infinite;width:max-content}
+.clients-track:hover{animation-play-state:paused}
+.client-logo{display:flex;align-items:center;justify-content:center;width:140px;height:56px;background:var(--glass);border:1px solid var(--border);border-radius:12px;font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700;color:var(--muted);letter-spacing:.05em;flex-shrink:0;transition:.3s;white-space:nowrap;padding:0 1rem}
+.client-logo:hover{border-color:var(--cyan);color:var(--white)}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* CARDS GRID */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.why-card{background:var(--glass);border:1px solid var(--border);border-radius:24px;padding:2.5rem;transition:all .4s;cursor:pointer;position:relative}
+.why-card::after{content:'';position:absolute;bottom:0;left:2.5rem;right:2.5rem;height:2px;background:var(--grad);opacity:0;transition:.4s;border-radius:100px}
+.why-card:hover{transform:translateY(-6px);border-color:rgba(41,182,246,.3)}
+.why-card:hover::after{opacity:1}
+.wc-num{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;opacity:.1;line-height:1;margin-bottom:1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.why-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.75rem}
+.why-card p{color:var(--muted);font-size:.9rem;line-height:1.8;font-weight:300}
+
+/* BLOG */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.blog-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;overflow:hidden;cursor:pointer;transition:all .4s}
+.blog-card:hover{transform:translateY(-6px);border-color:rgba(41,182,246,.3)}
+.blog-img{height:180px;background:var(--grad);position:relative;overflow:hidden}
+.blog-img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:.15}
+.blog-body{padding:1.5rem}
+.blog-tag{font-size:.75rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:.6rem;display:block}
+.blog-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;line-height:1.5;margin-bottom:.75rem}
+.blog-card p{color:var(--muted);font-size:.85rem;line-height:1.7;font-weight:300}
+.blog-meta{display:flex;align-items:center;gap:.5rem;margin-top:1rem;font-size:.8rem;color:var(--muted)}
+
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,rgba(21,101,192,.3),rgba(41,182,246,.15));border:1px solid var(--border);border-radius:28px;padding:5rem 4rem;text-align:center;position:relative;overflow:hidden;margin:0 5% 7rem}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(41,182,246,.1),transparent 70%)}
+.cta-band h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;margin-bottom:1rem;position:relative;z-index:1}
+.cta-band p{color:var(--muted);margin-bottom:2rem;font-size:1rem;line-height:1.8;position:relative;z-index:1}
+
+/* CONTACT FORM */
+.form-wrap{background:var(--glass);border:1px solid var(--border);border-radius:24px;padding:3rem;backdrop-filter:blur(10px);max-width:640px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
+.form-group label{font-size:.85rem;color:var(--muted);font-weight:500;letter-spacing:.03em}
+.form-group input,.form-group textarea,.form-group select{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:.85rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.95rem;transition:.3s;outline:none;resize:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--cyan);background:rgba(41,182,246,.05);box-shadow:0 0 0 4px rgba(41,182,246,.08)}
+.form-group textarea{min-height:130px}
+.checkbox-row{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
+.checkbox-row input{width:18px;height:18px;accent-color:var(--cyan);cursor:pointer}
+.checkbox-row label{font-size:.88rem;color:var(--muted);cursor:pointer}
+.form-success{display:none;background:rgba(0,229,255,.1);border:1px solid var(--cyan2);border-radius:12px;padding:1.5rem;text-align:center;color:var(--cyan2);font-weight:600;margin-top:1rem;animation:fadeUp .4s ease}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:2000;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--navy2);border:1px solid var(--border);border-radius:28px;padding:3rem;max-width:520px;width:100%;position:relative;max-height:90vh;overflow-y:auto}
+.modal-close{position:absolute;top:1.5rem;right:1.5rem;background:var(--glass);border:1px solid var(--border);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--muted);transition:.2s}
+.modal-close:hover{color:var(--white);border-color:var(--cyan)}
+.modal h2{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:.5rem}
+.modal p{color:var(--muted);font-size:.9rem;margin-bottom:2rem;line-height:1.7}
+.booking-types{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:2rem}
+.booking-type{background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:1.2rem;cursor:pointer;text-align:center;transition:.3s}
+.booking-type.selected{border-color:var(--cyan);background:rgba(41,182,246,.1)}
+.booking-type h4{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;margin-bottom:.3rem}
+.booking-type span{font-size:.75rem;color:var(--cyan);font-weight:600}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.4rem;margin-bottom:1.5rem}
+.cal-day-name{font-size:.72rem;color:var(--muted);text-align:center;padding:.3rem;letter-spacing:.05em;font-weight:600}
+.cal-day{width:100%;aspect-ratio:1;border-radius:8px;background:var(--glass);border:1px solid transparent;display:flex;align-items:center;justify-content:center;font-size:.82rem;cursor:pointer;transition:.3s;font-weight:500}
+.cal-day:not(.empty):hover{border-color:var(--cyan);color:var(--cyan)}
+.cal-day.selected{background:var(--cyan);color:var(--navy);font-weight:700;border-color:var(--cyan)}
+.cal-day.empty{background:transparent;cursor:default}
+.cal-day.past{opacity:.25;cursor:not-allowed}
+.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1.5rem}
+.time-slot{background:var(--glass);border:1px solid var(--border);border-radius:8px;padding:.6rem;text-align:center;font-size:.82rem;cursor:pointer;transition:.3s;font-weight:500}
+.time-slot:hover{border-color:var(--cyan);color:var(--cyan)}
+.time-slot.selected{background:var(--cyan);color:var(--navy);font-weight:700;border-color:var(--cyan)}
+.booking-confirm{display:none;text-align:center;padding:2rem 0}
+.booking-confirm .check{font-size:3.5rem;margin-bottom:1rem}
+.booking-confirm h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.75rem;color:var(--cyan)}
+.booking-confirm p{color:var(--muted);line-height:1.8;font-size:.9rem}
+
+/* FOOTER */
+footer{background:var(--navy2);border-top:1px solid var(--border);padding:5rem 5% 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem}
+.footer-brand p{color:var(--muted);font-size:.88rem;line-height:1.8;margin-top:1rem;max-width:280px;font-weight:300}
+.footer-col h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:1.2rem;color:var(--white)}
+.footer-col a{display:block;color:var(--muted);text-decoration:none;font-size:.85rem;margin-bottom:.7rem;transition:.2s;font-weight:300}
+.footer-col a:hover{color:var(--cyan)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{color:var(--muted);font-size:.82rem}
+.social-links{display:flex;gap:1rem}
+.social-link{width:38px;height:38px;background:var(--glass);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:.9rem;transition:.3s}
+.social-link:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-3px)}
+
+/* PAGE HEADERS */
+.page-header{padding:9rem 5% 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.page-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top left,rgba(21,101,192,.25),transparent 60%)}
+.page-header h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:1rem}
+.page-header p{color:var(--muted);font-size:1.05rem;line-height:1.8;max-width:580px;position:relative;z-index:1;font-weight:300}
+
+/* INDUSTRIES */
+.industries-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;padding:5rem 5%}
+.industry-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:2rem;cursor:pointer;transition:.4s;position:relative;overflow:hidden}
+.industry-card:hover{transform:translateY(-6px);border-color:rgba(41,182,246,.35)}
+.industry-card .ind-icon{font-size:2.2rem;margin-bottom:1rem;display:block}
+.industry-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.industry-card p{color:var(--muted);font-size:.85rem;line-height:1.6;font-weight:300}
+.industry-detail{padding:0 5% 5rem;display:none;animation:fadeUp .4s ease}
+.industry-detail.active{display:block}
+.industry-detail h2{font-family:'Syne',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;margin-bottom:1.5rem}
+.use-cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:2.5rem}
+.use-case{background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:1.5rem}
+.use-case h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.5rem;color:var(--cyan)}
+.use-case p{color:var(--muted);font-size:.82rem;line-height:1.6;font-weight:300}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+.benefit{background:rgba(41,182,246,.07);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center}
+.benefit .b-icon{font-size:1.5rem;margin-bottom:.6rem}
+.benefit h4{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;margin-bottom:.4rem}
+.benefit p{color:var(--muted);font-size:.8rem;font-weight:300}
+
+/* CASE STUDIES */
+.cs-list{padding:5rem 5%}
+.cs-card{background:var(--glass);border:1px solid var(--border);border-radius:24px;padding:3rem;margin-bottom:2rem;transition:.4s}
+.cs-card:hover{border-color:rgba(41,182,246,.3);transform:translateX(4px)}
+.cs-num{font-family:'Syne',sans-serif;font-size:.8rem;color:var(--cyan);font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;display:block}
+.cs-card h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:2rem}
+.cs-sections{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.cs-section h4{font-size:.78rem;color:var(--cyan);letter-spacing:.15em;text-transform:uppercase;font-weight:600;margin-bottom:.5rem}
+.cs-section p{color:var(--muted);font-size:.88rem;line-height:1.7;font-weight:300}
+.cs-result{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--white)}
+
+/* SERVICES PAGE */
+.services-list{padding:5rem 5%}
+.service-detail{background:var(--glass);border:1px solid var(--border);border-radius:24px;padding:3rem;margin-bottom:2rem;transition:.4s;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.service-detail:hover{border-color:rgba(41,182,246,.3)}
+.service-detail-left .sd-num{font-size:.8rem;color:var(--cyan);letter-spacing:.15em;font-weight:600;display:block;margin-bottom:.75rem}
+.service-detail-left h3{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:1rem}
+.service-detail-left p{color:var(--muted);font-size:.9rem;line-height:1.8;font-weight:300}
+.service-features{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.service-features li{display:flex;align-items:flex-start;gap:.75rem;color:var(--muted);font-size:.88rem;font-weight:300}
+.service-features li::before{content:'→';color:var(--cyan);flex-shrink:0;font-size:.9rem;margin-top:.05rem}
+
+/* ABOUT */
+.about-content{padding:5rem 5%}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:5rem}
+.about-grid p{color:var(--muted);line-height:1.9;font-size:.95rem;font-weight:300;margin-bottom:1.5rem}
+.mission-vision{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem}
+.mv-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:2.5rem}
+.mv-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.75rem;color:var(--cyan)}
+.mv-card p{color:var(--muted);font-size:.9rem;line-height:1.8;font-weight:300}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem}
+.team-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:2rem;text-align:center;transition:.4s}
+.team-card:hover{transform:translateY(-6px);border-color:rgba(41,182,246,.3)}
+.team-avatar{width:72px;height:72px;border-radius:50%;background:var(--grad);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800}
+.team-card h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.25rem}
+.team-card span{font-size:.8rem;color:var(--cyan);font-weight:500}
+
+/* INSIGHTS PAGE */
+.insights-content{padding:5rem 5%}
+.insight-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;overflow:hidden;cursor:pointer;transition:.4s;display:grid;grid-template-columns:300px 1fr;margin-bottom:2rem;align-items:stretch}
+.insight-card:hover{border-color:rgba(41,182,246,.3);transform:translateX(4px)}
+.insight-img{background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:3.5rem;opacity:.4;min-height:160px}
+.insight-body{padding:2rem}
+.insight-body .tag{font-size:.75rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:.6rem;display:block}
+.insight-body h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.75rem}
+.insight-body p{color:var(--muted);font-size:.88rem;line-height:1.7;font-weight:300}
+.insight-meta{display:flex;align-items:center;gap:1.5rem;margin-top:1.5rem;font-size:.82rem;color:var(--muted)}
+
+/* PUBLIC SECTOR */
+.ps-content{padding:5rem 5%}
+.ps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-bottom:4rem}
+.ps-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:2rem;transition:.4s}
+.ps-card:hover{border-color:rgba(41,182,246,.3);transform:translateY(-6px)}
+.ps-card .ps-icon{font-size:1.8rem;margin-bottom:1rem}
+.ps-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.6rem}
+.ps-card p{color:var(--muted);font-size:.85rem;line-height:1.7;font-weight:300}
+
+/* SCROLL ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.fade-in-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease}
+.fade-in-left.visible{opacity:1;transform:translateX(0)}
+.stagger-1{transition-delay:.1s}
+.stagger-2{transition-delay:.2s}
+.stagger-3{transition-delay:.3s}
+.stagger-4{transition-delay:.4s}
+.stagger-5{transition-delay:.5s}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:0 5%}
+
+/* BACK BUTTON */
+.back-btn{display:inline-flex;align-items:center;gap:.5rem;color:var(--cyan);font-size:.9rem;font-weight:600;cursor:pointer;margin:3rem 5% 0;transition:.2s;background:none;border:none}
+.back-btn:hover{gap:.8rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .cs-sections{grid-template-columns:1fr}
+  .service-detail{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .insight-card{grid-template-columns:1fr}
+  .benefits{grid-template-columns:1fr 1fr}
+  .booking-types{grid-template-columns:1fr}
+  .mission-vision{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  nav .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .hero h1{font-size:2rem}
+  .hero-stats{gap:1.5rem}
+  .footer-grid{grid-template-columns:1fr}
+  .benefits{grid-template-columns:1fr}
+  section{padding:4rem 5%}
+}
+</style>
+</head>
+<body>
+
+
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="logo" onclick="showPage('home')">
+    <div class="logo-diamond">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="dg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#29b6f6;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#1565c0;stop-opacity:1"/>
+          </linearGradient>
+          <linearGradient id="dg2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00e5ff;stop-opacity:0.6"/>
+            <stop offset="100%" style="stop-color:#29b6f6;stop-opacity:0.1"/>
+          </linearGradient>
+        </defs>
+        <path d="M20 2L38 20L20 38L2 20Z" fill="url(#dg)" stroke="rgba(41,182,246,0.4)" stroke-width="0.5"/>
+        <path d="M20 7L34 20L20 33L6 20Z" fill="url(#dg2)" opacity="0.5"/>
+        <path d="M20 12L29 20L20 28L11 20Z" fill="#0d1b2e" opacity="0.7"/>
+        <path d="M20 14L27 20L20 26L13 20Z" fill="url(#dg)" opacity="0.8"/>
+      </svg>
+    </div>
+    <span class="logo-text">Coratech <span>AI</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home');return false">Home</a></li>
+    <li><a href="#" onclick="showPage('case-studies');return false">Case Studies</a></li>
+    <li><a href="#" onclick="showPage('industries');return false">Industries</a></li>
+    <li><a href="#" onclick="showPage('services');return false">Services</a></li>
+    <li><a href="#" onclick="showPage('about');return false">About Us</a></li>
+    <li><a href="#" onclick="showPage('insights');return false">Insights</a></li>
+    <li><a href="#" onclick="showPage('public-sector');return false">Public Sector</a></li>
+    <li><a href="#" onclick="showPage('contact');return false">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="openBooking()">Book a Call</button>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showPage('home');toggleMenu();return false">Home</a>
+  <a href="#" onclick="showPage('case-studies');toggleMenu();return false">Case Studies</a>
+  <a href="#" onclick="showPage('industries');toggleMenu();return false">Industries</a>
+  <a href="#" onclick="showPage('services');toggleMenu();return false">Services</a>
+  <a href="#" onclick="showPage('about');toggleMenu();return false">About Us</a>
+  <a href="#" onclick="showPage('insights');toggleMenu();return false">Insights</a>
+  <a href="#" onclick="showPage('public-sector');toggleMenu();return false">Public Sector</a>
+  <a href="#" onclick="showPage('contact');toggleMenu();return false">Contact</a>
+  <button class="btn-primary" style="margin-top:1rem" onclick="openBooking();toggleMenu()">Book a Discovery Call</button>
+</div>
+
+<!-- ===================== HOME PAGE ===================== -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-orb o1"></div>
+      <div class="hero-orb o2"></div>
+      <div class="hero-orb o3"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Enterprise AI Consultancy</div>
+      <h1>Bespoke AI solutions designed for your <span class="hl">unique workflows</span></h1>
+      <p>Adaptive AI built for enterprise. Whether you're starting your AI journey or scaling, we ensure secure deployment, governance, and measurable outcomes.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="openBooking()">📅 Book a Free Discovery Call</button>
+        <button class="btn-secondary" onclick="showPage('services')">Explore Services →</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">150+</span><span class="stat-label">ENTERPRISE CLIENTS</span></div>
+        <div class="stat"><span class="stat-num">98%</span><span class="stat-label">CLIENT SATISFACTION</span></div>
+        <div class="stat"><span class="stat-num">10+</span><span class="stat-label">YEARS IN AI</span></div>
+        <div class="stat"><span class="stat-num">3.2×</span><span class="stat-label">AVG ROI UPLIFT</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hc-row">
+          <div class="hc-icon">🤖</div>
+          <div><div class="hc-label">AI Agents Active</div><div class="hc-value">24 deployed</div></div>
+        </div>
+        <div class="hc-bar-wrap"><div class="hc-bar" style="--w:85%"></div></div>
+        <div style="margin-top:1.5rem">
+          <div class="hc-row">
+            <div class="hc-icon" style="background:linear-gradient(135deg,#00e5ff,#29b6f6)">📊</div>
+            <div><div class="hc-label">Efficiency Gain</div><div class="hc-value">+340%</div></div>
+          </div>
+          <div class="hc-bar-wrap"><div class="hc-bar" style="--w:92%;background:linear-gradient(90deg,#00e5ff,#29b6f6)"></div></div>
+        </div>
+        <div style="margin-top:1.5rem">
+          <div class="hc-row">
+            <div class="hc-icon" style="background:linear-gradient(135deg,#1565c0,#0d47a1)">💡</div>
+            <div><div class="hc-label">Cost Reduction</div><div class="hc-value">-62% OpEx</div></div>
+          </div>
+          <div class="hc-bar-wrap"><div class="hc-bar" style="--w:62%;background:linear-gradient(90deg,#1565c0,#29b6f6)"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI ROADMAP -->
+  <section class="roadmap fade-in">
+    <div class="section-label">Our Process</div>
+    <h2 class="section-title">Your AI <span class="hl">Journey</span> with Coratech</h2>
+    <p class="section-sub">A proven five-stage framework that takes your organisation from AI readiness to full-scale deployment and beyond.</p>
+    <div class="roadmap-track" id="roadmapTrack">
+      <div class="rm-step active" onclick="selectStage(0)">
+        <div class="rm-dot"></div>
+        <div class="rm-num">01</div>
+        <div class="rm-title">Discovery & Strategy</div>
+      </div>
+      <div class="rm-step" onclick="selectStage(1)">
+        <div class="rm-dot"></div>
+        <div class="rm-num">02</div>
+        <div class="rm-title">Prototype & Validation</div>
+      </div>
+      <div class="rm-step" onclick="selectStage(2)">
+        <div class="rm-dot"></div>
+        <div class="rm-num">03</div>
+        <div class="rm-title">Architecture Design</div>
+      </div>
+      <div class="rm-step" onclick="selectStage(3)">
+        <div class="rm-dot"></div>
+        <div class="rm-num">04</div>
+        <div class="rm-title">Build & Deploy</div>
+      </div>
+      <div class="rm-step" onclick="selectStage(4)">
+        <div class="rm-dot"></div>
+        <div class="rm-num">05</div>
+        <div class="rm-title">Ongoing Support</div>
+      </div>
+    </div>
+    <div class="rm-content" id="rmContent"></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SERVICES GRID -->
+  <section class="fade-in">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Our <span class="hl">Core Services</span></h2>
+    <p class="section-sub">From strategy to deployment, we deliver AI solutions that transform how enterprises operate and compete.</p>
+    <div class="services-grid">
+      <div class="svc-card fade-in stagger-1" onclick="showPage('services')">
+        <span class="svc-icon">🔍</span>
+        <h3>AI Discovery & Strategy</h3>
+        <p>We assess your operations, identify high-value AI opportunities, and build a tailored roadmap aligned with your business goals.</p>
+        <div class="svc-link">Read More <span>→</span></div>
+      </div>
+      <div class="svc-card fade-in stagger-2" onclick="showPage('services')">
+        <span class="svc-icon">🤖</span>
+        <h3>Multi-Agent Systems</h3>
+        <p>Autonomous AI agents that collaborate to execute complex workflows — from data processing to decision-making at enterprise scale.</p>
+        <div class="svc-link">Read More <span>→</span></div>
+      </div>
+      <div class="svc-card fade-in stagger-3" onclick="showPage('services')">
+        <span class="svc-icon">💹</span>
+        <h3>Finance AI Solutions</h3>
+        <p>Risk modelling, fraud detection, forecasting, and automated reporting powered by production-grade machine learning.</p>
+        <div class="svc-link">Read More <span>→</span></div>
+      </div>
+      <div class="svc-card fade-in stagger-4" onclick="showPage('services')">
+        <span class="svc-icon">📚</span>
+        <h3>Knowledge Management AI</h3>
+        <p>Intelligent document retrieval, enterprise search, and knowledge graph systems that surface the right information instantly.</p>
+        <div class="svc-link">Read More <span>→</span></div>
+      </div>
+      <div class="svc-card fade-in stagger-5" onclick="showPage('services')">
+        <span class="svc-icon">💬</span>
+        <h3>Customer Support AI</h3>
+        <p>Conversational AI agents and smart escalation systems that deliver 24/7 support with human-level understanding.</p>
+        <div class="svc-link">Read More <span>→</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CLIENTS -->
+  <section class="fade-in" style="padding-bottom:3rem">
+    <div class="section-label">Trusted By</div>
+    <h2 class="section-title" style="margin-bottom:2.5rem">Partners & <span class="hl">Clients</span></h2>
+    <div class="clients-wrap">
+      <div class="clients-track" id="clientsTrack">
+        <div class="client-logo">NovaCorp</div>
+        <div class="client-logo">Meridian Bank</div>
+        <div class="client-logo">StellarRetail</div>
+        <div class="client-logo">EduForward</div>
+        <div class="client-logo">PrimeLogistics</div>
+        <div class="client-logo">ArcaHealth</div>
+        <div class="client-logo">VantageInsure</div>
+        <div class="client-logo">LexCounsel</div>
+        <div class="client-logo">OmegaRealty</div>
+        <div class="client-logo">HospitalityX</div>
+        <div class="client-logo">NovaCorp</div>
+        <div class="client-logo">Meridian Bank</div>
+        <div class="client-logo">StellarRetail</div>
+        <div class="client-logo">EduForward</div>
+        <div class="client-logo">PrimeLogistics</div>
+        <div class="client-logo">ArcaHealth</div>
+        <div class="client-logo">VantageInsure</div>
+        <div class="client-logo">LexCounsel</div>
+        <div class="client-logo">OmegaRealty</div>
+        <div class="client-logo">HospitalityX</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CORATECH -->
+  <section class="fade-in">
+    <div class="section-label">Why Us</div>
+    <h2 class="section-title">Why <span class="hl">Coratech AI</span></h2>
+    <p class="section-sub">We bring deep technical expertise and enterprise business context together — so your AI investments actually deliver.</p>
+    <div class="why-grid">
+      <div class="why-card fade-in stagger-1">
+        <div class="wc-num">01</div>
+        <h3>AI Readiness & Strategy</h3>
+        <p>We evaluate your data maturity, technology stack, and team capabilities to produce a clear, phased AI strategy that minimises risk and maximises ROI.</p>
+      </div>
+      <div class="why-card fade-in stagger-2">
+        <div class="wc-num">02</div>
+        <h3>Rapid Prototyping</h3>
+        <p>In 4–8 weeks, we build working prototypes of your highest-impact AI use cases — validated against real data before full development begins.</p>
+      </div>
+      <div class="why-card fade-in stagger-3">
+        <div class="wc-num">03</div>
+        <h3>System Build & Deployment</h3>
+        <p>Production-ready AI systems built with rigorous testing, security controls, monitoring dashboards, and seamless integration into your existing infrastructure.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="fade-in">
+    <div class="section-label">Insights</div>
+    <h2 class="section-title">Latest <span class="hl">Thinking</span></h2>
+    <p class="section-sub">Thought leadership from our team on enterprise AI strategy, deployment, and transformation.</p>
+    <div class="blog-grid">
+      <div class="blog-card fade-in stagger-1" onclick="showPage('insights')">
+        <div class="blog-img" style="background:linear-gradient(135deg,#1565c0,#0d47a1)"><div class="blog-img-overlay">🧠</div></div>
+        <div class="blog-body">
+          <span class="blog-tag">Leadership</span>
+          <h3>10+ Years Building Production AI: Lessons from the Frontlines</h3>
+          <p>What separates AI projects that deliver from those that stall — and how to ensure your investment lands in the first category.</p>
+          <div class="blog-meta"><span>8 min read</span> · <span>March 2025</span></div>
+        </div>
+      </div>
+      <div class="blog-card fade-in stagger-2" onclick="showPage('insights')">
+        <div class="blog-img" style="background:linear-gradient(135deg,#0077b6,#29b6f6)"><div class="blog-img-overlay">📈</div></div>
+        <div class="blog-body">
+          <span class="blog-tag">ROI</span>
+          <h3>Delivering Measurable ROI with AI: A Framework for Enterprise Teams</h3>
+          <p>Our proven methodology for tracking, measuring, and communicating AI value to leadership and investors.</p>
+          <div class="blog-meta"><span>6 min read</span> · <span>February 2025</span></div>
+        </div>
+      </div>
+      <div class="blog-card fade-in stagger-3" onclick="showPage('insights')">
+        <div class="blog-img" style="background:linear-gradient(135deg,#004d8c,#1565c0)"><div class="blog-img-overlay">🏛️</div></div>
+        <div class="blog-body">
+          <span class="blog-tag">Strategy</span>
+          <h3>Thought Leadership in Enterprise AI: Setting Your Organisation Apart</h3>
+          <p>How forward-thinking enterprises are using AI governance, ethics frameworks, and innovation labs to stay ahead.</p>
+          <div class="blog-meta"><span>10 min read</span> · <span>January 2025</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band fade-in">
+    <h2>Ready to start your <span class="hl">AI journey</span> today?</h2>
+    <p>Join 150+ enterprises who have transformed their operations with Coratech AI. Let's build something remarkable together.</p>
+    <button class="btn-primary" onclick="openBooking()">📅 Book Your Free Strategy Session</button>
+  </div>
+
+  <!-- CONTACT SECTION -->
+  <section class="fade-in" id="homeContact">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title" style="margin-bottom:2rem">Let's <span class="hl">Talk AI</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+      <div>
+        <p style="color:var(--muted);line-height:1.9;margin-bottom:2rem;font-weight:300">Whether you're exploring AI for the first time or scaling an existing initiative, our team is ready to help you chart the right course. No sales pitch — just an honest conversation.</p>
+        <div style="display:flex;flex-direction:column;gap:1.2rem;margin-bottom:2rem">
+          <div style="display:flex;align-items:center;gap:.75rem;color:var(--muted);font-size:.9rem">
+            <span style="color:var(--cyan);font-size:1.1rem">📧</span> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ff7faf3f3f0dffcf0edfeebfafcf7fef6b1fcf0f2">[email&#160;protected]</a>
+          </div>
+          <div style="display:flex;align-items:center;gap:.75rem;color:var(--muted);font-size:.9rem">
+            <span style="color:var(--cyan);font-size:1.1rem">📞</span> +233 536 026 175
+          </div>
+          <div style="display:flex;align-items:center;gap:.75rem;color:var(--muted);font-size:.9rem">
+            <span style="color:var(--cyan);font-size:1.1rem">🌍</span> Global — Remote-first with on-site capability
+          </div>
+        </div>
+      </div>
+      <div class="form-wrap">
+        <div class="form-row">
+          <div class="form-group"><label>Full Name</label><input type="text" placeholder="Jane Smith" id="cName"/></div>
+          <div class="form-group"><label>Company</label><input type="text" placeholder="Acme Corp" id="cCompany"/></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="jane@company.com" id="cEmail"/></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your AI challenge..." id="cMessage"></textarea></div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="cRobot"/>
+          <label for="cRobot">I'm not a robot, and I agree to be contacted.</label>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitContact()">Send Message →</button>
+        <div class="form-success" id="formSuccess">✅ Message sent successfully! We'll be in touch within 24 hours.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end home -->
+
+<!-- ===================== CASE STUDIES PAGE ===================== -->
+<div id="page-case-studies" class="page">
+  <div class="page-header">
+    <div class="section-label">Case Studies</div>
+    <h1>Proof of <span class="hl">Impact</span></h1>
+    <p>Real projects. Real results. See how Coratech AI has transformed enterprises across industries.</p>
+  </div>
+  <div class="cs-list">
+    <div class="cs-card fade-in">
+      <span class="cs-num">Case Study 01</span>
+      <h3>Multi-Agent Orchestration System for Financial Services</h3>
+      <div class="cs-sections">
+        <div class="cs-section">
+          <h4>Problem</h4>
+          <p>A leading investment bank's back-office operations were bottlenecked by manual data reconciliation across 12 disparate systems, taking 40+ hours per week per team.</p>
+        </div>
+        <div class="cs-section">
+          <h4>Solution</h4>
+          <p>We designed and deployed a multi-agent orchestration system where specialised AI agents each managed a data domain, with a master orchestrator handling routing, conflict resolution, and escalation logic.</p>
+        </div>
+        <div class="cs-section">
+          <h4>Results</h4>
+          <div class="cs-result">⬇️ 87% reduction in processing time</div>
+          <div class="cs-result">💰 £1.4M annual cost saving</div>
+          <div class="cs-result">⬆️ 99.6% accuracy rate</div>
+        </div>
+      </div>
+    </div>
+    <div class="cs-card fade-in">
+      <span class="cs-num">Case Study 02</span>
+      <h3>AI Document Processing Automation for Legal Firm</h3>
+      <div class="cs-sections">
+        <div class="cs-section">
+          <h4>Problem</h4>
+          <p>A top-10 legal firm was spending thousands of billable hours on contract review, due diligence, and clause extraction — work that was error-prone and slow at scale.</p>
+        </div>
+        <div class="cs-section">
+          <h4>Solution</h4>
+          <p>We built a document intelligence pipeline using fine-tuned LLMs for clause identification, risk flagging, and summarisation — integrated directly into their existing document management system.</p>
+        </div>
+        <div class="cs-section">
+          <h4>Results</h4>
+          <div class="cs-result">⚡ 10× faster document review</div>
+          <div class="cs-result">🎯 94% clause extraction accuracy</div>
+          <div class="cs-result">🕐 3,200 hours saved per quarter</div>
+        </div>
+      </div>
+    </div>
+    <div class="cs-card fade-in">
+      <span class="cs-num">Case Study 03</span>
+      <h3>SQL AI Agent for Enterprise Data Analytics</h3>
+      <div class="cs-sections">
+        <div class="cs-section">
+          <h4>Problem</h4>
+          <p>A retail group's non-technical teams were entirely dependent on the data team for every business question, creating a months-long backlog and slowing decision-making across departments.</p>
+        </div>
+        <div class="cs-section">
+          <h4>Solution</h4>
+          <p>We deployed a natural language-to-SQL AI agent connected to their enterprise data warehouse, allowing business users to ask questions in plain English and receive accurate, real-time analytics.</p>
+        </div>
+        <div class="cs-section">
+          <h4>Results</h4>
+          <div class="cs-result">🌐 500+ users empowered with self-serve analytics</div>
+          <div class="cs-result">📉 78% reduction in data team requests</div>
+          <div class="cs-result">⏱️ Insights in seconds vs. days</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta-band fade-in" style="margin-bottom:5rem">
+    <h2>Want results like these <span class="hl">for your business</span>?</h2>
+    <p>Let's explore what's possible in a free 30-minute discovery call.</p>
+    <button class="btn-primary" onclick="openBooking()">📅 Book a Discovery Call</button>
+  </div>
+</div>
+
+<!-- ===================== INDUSTRIES PAGE ===================== -->
+<div id="page-industries" class="page">
+  <div class="page-header">
+    <div class="section-label">Industries</div>
+    <h1>AI for Every <span class="hl">Sector</span></h1>
+    <p>We've delivered AI transformation across 9 industries. Select your sector to explore tailored solutions.</p>
+  </div>
+  <div class="industries-grid" id="industriesGrid">
+    <div class="industry-card fade-in stagger-1" onclick="showIndustry('transport')"><span class="ind-icon">🚛</span><h3>Transport & Logistics</h3><p>Route optimisation, demand forecasting, fleet AI, and predictive maintenance.</p></div>
+    <div class="industry-card fade-in stagger-2" onclick="showIndustry('finance')"><span class="ind-icon">💹</span><h3>Finance</h3><p>Risk modelling, fraud detection, algorithmic trading support, and regulatory AI.</p></div>
+    <div class="industry-card fade-in stagger-3" onclick="showIndustry('retail')"><span class="ind-icon">🛍️</span><h3>Retail</h3><p>Personalisation engines, inventory AI, demand sensing, and customer analytics.</p></div>
+    <div class="industry-card fade-in stagger-4" onclick="showIndustry('education')"><span class="ind-icon">🎓</span><h3>Education</h3><p>Adaptive learning, student success prediction, content generation, and admin AI.</p></div>
+    <div class="industry-card fade-in stagger-5" onclick="showIndustry('hospitality')"><span class="ind-icon">🏨</span><h3>Hospitality</h3><p>Dynamic pricing, guest experience AI, review analysis, and booking optimisation.</p></div>
+    <div class="industry-card fade-in stagger-1" onclick="showIndustry('realestate')"><span class="ind-icon">🏢</span><h3>Real Estate</h3><p>Valuation AI, lease intelligence, tenant risk scoring, and market forecasting.</p></div>
+    <div class="industry-card fade-in stagger-2" onclick="showIndustry('insurance')"><span class="ind-icon">🛡️</span><h3>Insurance</h3><p>Claims automation, underwriting AI, fraud detection, and customer journey AI.</p></div>
+    <div class="industry-card fade-in stagger-3" onclick="showIndustry('legal')"><span class="ind-icon">⚖️</span><h3>Legal</h3><p>Contract intelligence, due diligence automation, legal research AI, and e-discovery.</p></div>
+    <div class="industry-card fade-in stagger-4" onclick="showIndustry('public')"><span class="ind-icon">🏛️</span><h3>Public Sector</h3><p>Citizen services AI, regulatory compliance, fraud prevention, and data analytics.</p></div>
+  </div>
+  <div class="industry-detail" id="industryDetail"></div>
+</div>
+
+<!-- ===================== SERVICES PAGE ===================== -->
+<div id="page-services" class="page">
+  <div class="page-header">
+    <div class="section-label">Services</div>
+    <h1>From Strategy to <span class="hl">Deployment</span></h1>
+    <p>End-to-end AI services designed for enterprises that demand excellence, security, and measurable outcomes.</p>
+  </div>
+  <div class="services-list">
+    <div class="service-detail fade-in">
+      <div class="service-detail-left">
+        <span class="sd-num">01 — AI Strategy</span>
+        <h3>AI Strategy & Readiness</h3>
+        <p>We analyse your business, data landscape, and competitive environment to create a bespoke AI strategy. Our strategic services include opportunity mapping, ROI modelling, governance design, and executive alignment workshops.</p>
+      </div>
+      <ul class="service-features">
+        <li>AI Opportunity Assessment across all business units</li>
+        <li>Data maturity audit and gap analysis</li>
+        <li>3-year AI roadmap with phased investment plan</li>
+        <li>Executive AI literacy workshops</li>
+        <li>Governance & ethics framework design</li>
+        <li>Build vs. buy decision support</li>
+      </ul>
+    </div>
+    <div class="service-detail fade-in">
+      <div class="service-detail-left">
+        <span class="sd-num">02 — AI Development</span>
+        <h3>Custom AI Development</h3>
+        <p>Our engineering team builds production-grade AI systems from scratch — LLM applications, computer vision systems, predictive models, and multi-agent frameworks designed for your exact requirements.</p>
+      </div>
+      <ul class="service-features">
+        <li>Large Language Model fine-tuning and RAG systems</li>
+        <li>Multi-agent orchestration frameworks</li>
+        <li>Computer vision and document AI pipelines</li>
+        <li>Predictive and prescriptive ML models</li>
+        <li>Real-time inference infrastructure</li>
+        <li>MLOps pipelines and model monitoring</li>
+      </ul>
+    </div>
+    <div class="service-detail fade-in">
+      <div class="service-detail-left">
+        <span class="sd-num">03 — AI Integration</span>
+        <h3>Enterprise AI Integration</h3>
+        <p>We connect AI capabilities to your existing systems — ERP, CRM, data warehouses, and workflows — with secure APIs, robust data pipelines, and no disruption to existing operations.</p>
+      </div>
+      <ul class="service-features">
+        <li>Legacy system AI augmentation</li>
+        <li>API design and microservices architecture</li>
+        <li>Real-time data pipeline engineering</li>
+        <li>CRM and ERP AI plug-ins</li>
+        <li>Cloud and on-premise hybrid deployments</li>
+        <li>Security, compliance, and GDPR review</li>
+      </ul>
+    </div>
+    <div class="service-detail fade-in">
+      <div class="service-detail-left">
+        <span class="sd-num">04 — AI Training</span>
+        <h3>AI Training & Enablement</h3>
+        <p>We upskill your teams to confidently work with AI — from data scientists to business leaders. Our programmes combine hands-on labs, live coaching, and tailored curriculum for your sector.</p>
+      </div>
+      <ul class="service-features">
+        <li>Executive AI literacy programmes</li>
+        <li>Data science bootcamps and workshops</li>
+        <li>Prompt engineering and LLM usage training</li>
+        <li>AI product management masterclasses</li>
+        <li>Change management and adoption coaching</li>
+        <li>Custom eLearning module development</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ABOUT PAGE ===================== -->
+<div id="page-about" class="page">
+  <div class="page-header">
+    <div class="section-label">About Us</div>
+    <h1>Built for Enterprise <span class="hl">Transformation</span></h1>
+    <p>Coratech AI is a specialist AI consultancy founded by practitioners who have spent over a decade delivering real AI in complex enterprise environments.</p>
+  </div>
+  <div class="about-content">
+    <div class="about-grid fade-in">
+      <div>
+        <h2 class="section-title" style="font-size:1.6rem;margin-bottom:1.5rem">Our <span class="hl">Story</span></h2>
+        <p>Coratech AI was founded on a single conviction: that the gap between AI hype and real enterprise value is a delivery problem, not a technology problem. Too many organisations invest in AI and see nothing. We exist to change that.</p>
+        <p>Our founders have held senior AI and data science roles at FTSE 100 companies, global banks, and AI-native tech firms. We have built, failed, learned, and shipped production AI systems at scale. That hard-won experience is what we bring to every client engagement.</p>
+        <p>Today, Coratech AI partners with enterprises across 9 industries globally — from seed-stage fintechs to multi-national corporations — delivering bespoke AI solutions that generate measurable, lasting impact.</p>
+      </div>
+      <div>
+        <div class="mission-vision">
+          <div class="mv-card">
+            <h3>🎯 Our Mission</h3>
+            <p>To make enterprise AI accessible, effective, and transformative — delivering solutions that are secure, explainable, and deeply aligned with business outcomes.</p>
+          </div>
+          <div class="mv-card">
+            <h3>🔭 Our Vision</h3>
+            <p>A world where every organisation, regardless of size or sector, can harness the power of AI to solve their most important challenges and create extraordinary value.</p>
+          </div>
+        </div>
+        <div class="mv-card" style="margin-top:1.5rem">
+          <h3>⚡ Our Values</h3>
+          <p style="line-height:1.8;font-size:.9rem;color:var(--muted);font-weight:300">Integrity over hype. Evidence over assumption. Partnership over transaction. Outcomes over outputs. We hold ourselves accountable to the same metrics we set for our clients.</p>
+        </div>
+      </div>
+    </div>
+    <div class="section-label fade-in">Leadership Team</div>
+    <h2 class="section-title fade-in" style="margin-bottom:2rem">Meet the <span class="hl">Team</span></h2>
+    <div class="team-grid">
+      <div class="team-card fade-in stagger-1"><div class="team-avatar">KO</div><h4>Kwame Osei</h4><span>CEO & Co-Founder</span></div>
+      <div class="team-card fade-in stagger-2"><div class="team-avatar">AA</div><h4>Adwoa Asante</h4><span>CTO & Co-Founder</span></div>
+      <div class="team-card fade-in stagger-3"><div class="team-avatar">JM</div><h4>James Mensah</h4><span>Head of AI Engineering</span></div>
+      <div class="team-card fade-in stagger-4"><div class="team-avatar">FA</div><h4>Fatima Aidoo</h4><span>Head of Strategy</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== INSIGHTS PAGE ===================== -->
+<div id="page-insights" class="page">
+  <div class="page-header">
+    <div class="section-label">Insights</div>
+    <h1>AI <span class="hl">Intelligence</span> for Leaders</h1>
+    <p>Deep-dive articles, frameworks, and research from the Coratech AI team.</p>
+  </div>
+  <div class="insights-content">
+    <div class="insight-card fade-in">
+      <div class="insight-img">🧠</div>
+      <div class="insight-body">
+        <span class="tag">Leadership</span>
+        <h3>10+ Years Building Production AI: Lessons from the Frontlines</h3>
+        <p>What separates AI projects that deliver genuine ROI from those that stall, fail, or quietly get shelved — and the key decision points that determine which camp yours falls into. A frank look at failure modes and how to avoid them.</p>
+        <div class="insight-meta"><span>📖 8 min read</span><span>March 2025</span></div>
+      </div>
+    </div>
+    <div class="insight-card fade-in">
+      <div class="insight-img">📈</div>
+      <div class="insight-body">
+        <span class="tag">ROI & Measurement</span>
+        <h3>Delivering Measurable ROI with AI: A Framework for Enterprise Teams</h3>
+        <p>How to define, track, and communicate AI value — from pilot through to full scale. Includes our 4-dimension ROI framework used across 150+ enterprise engagements, with sector-specific benchmarks.</p>
+        <div class="insight-meta"><span>📖 6 min read</span><span>February 2025</span></div>
+      </div>
+    </div>
+    <div class="insight-card fade-in">
+      <div class="insight-img">🏛️</div>
+      <div class="insight-body">
+        <span class="tag">Strategy</span>
+        <h3>Thought Leadership in Enterprise AI: Setting Your Organisation Apart</h3>
+        <p>Why AI governance, ethics frameworks, and innovation labs are becoming decisive competitive advantages — and how to build an AI leadership position that is credible, durable, and genuinely differentiated.</p>
+        <div class="insight-meta"><span>📖 10 min read</span><span>January 2025</span></div>
+      </div>
+    </div>
+    <div class="insight-card fade-in">
+      <div class="insight-img">🤖</div>
+      <div class="insight-body">
+        <span class="tag">Technology</span>
+        <h3>The Rise of Multi-Agent AI: What Enterprise Leaders Need to Know</h3>
+        <p>Autonomous agents that work together to complete complex tasks are moving from research labs to production. Here's how they work, where they deliver real value, and the risks to manage carefully.</p>
+        <div class="insight-meta"><span>📖 12 min read</span><span>December 2024</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PUBLIC SECTOR PAGE ===================== -->
+<div id="page-public-sector" class="page">
+  <div class="page-header">
+    <div class="section-label">Public Sector</div>
+    <h1>AI for <span class="hl">Government</span> & Public Services</h1>
+    <p>Responsible, explainable AI solutions that help government bodies and public institutions serve citizens more effectively, safely, and efficiently.</p>
+  </div>
+  <div class="ps-content">
+    <div class="section-label fade-in">Our Approach</div>
+    <h2 class="section-title fade-in">Responsible AI for the <span class="hl">Public Good</span></h2>
+    <p class="section-sub fade-in">We understand the unique obligations of public sector organisations — transparency, accountability, equity, and value for taxpayer money. Every solution we build is designed to meet these standards without compromise.</p>
+    <div class="ps-grid">
+      <div class="ps-card fade-in stagger-1"><div class="ps-icon">👥</div><h3>Citizen Services AI</h3><p>Intelligent chatbots and document processing systems that make citizen interactions faster, more accessible, and available 24/7 across channels.</p></div>
+      <div class="ps-card fade-in stagger-2"><div class="ps-icon">🛡️</div><h3>Fraud & Compliance AI</h3><p>Advanced anomaly detection and audit trail systems that protect public funds and ensure regulatory compliance at scale.</p></div>
+      <div class="ps-card fade-in stagger-3"><div class="ps-icon">📊</div><h3>Policy Analytics</h3><p>Data-driven policy modelling and impact assessment tools that help decision-makers understand outcomes before implementation.</p></div>
+      <div class="ps-card fade-in stagger-4"><div class="ps-icon">🏥</div><h3>Healthcare & Social Care AI</h3><p>Predictive models for demand planning, resource allocation, and patient risk scoring across NHS and social care systems.</p></div>
+      <div class="ps-card fade-in stagger-5"><div class="ps-icon">🎓</div><h3>Education Authority AI</h3><p>Early intervention systems, attendance analytics, and performance forecasting for local authorities and academy trusts.</p></div>
+      <div class="ps-card fade-in stagger-1"><div class="ps-icon">🚔</div><h3>Public Safety AI</h3><p>Ethical, bias-audited AI tools for public safety prediction, resource dispatch optimisation, and evidence management.</p></div>
+    </div>
+    <div class="cta-band fade-in" style="margin:0 0 3rem">
+      <h2>Partnering with <span class="hl">government</span> to deliver more</h2>
+      <p>We hold G-Cloud and Crown Commercial Service frameworks. Let's discuss how AI can serve your citizens better.</p>
+      <button class="btn-primary" onclick="openBooking()">📅 Schedule a Public Sector Briefing</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CONTACT PAGE ===================== -->
+<div id="page-contact" class="page">
+  <div class="page-header">
+    <div class="section-label">Contact Us</div>
+    <h1>Start the <span class="hl">Conversation</span></h1>
+    <p>Ready to explore AI for your organisation? Our team is standing by. No hard sell — just a genuine conversation about what's possible.</p>
+  </div>
+  <section>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+      <div class="fade-in">
+        <h3 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem">Get in Touch</h3>
+        <div style="display:flex;flex-direction:column;gap:1.5rem;margin-bottom:3rem">
+          <div style="display:flex;align-items:flex-start;gap:1rem">
+            <span style="font-size:1.3rem;margin-top:.1rem">📧</span>
+            <div><div style="font-weight:600;margin-bottom:.2rem">Email</div><div style="color:var(--muted);font-size:.9rem"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f171a1313103f1c100d1e0b1a1c171e16511c1012">[email&#160;protected]</a></div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:1rem">
+            <span style="font-size:1.3rem;margin-top:.1rem">📞</span>
+            <div><div style="font-weight:600;margin-bottom:.2rem">Phone</div><div style="color:var(--muted);font-size:.9rem">+233 536 026 175</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:1rem">
+            <span style="font-size:1.3rem;margin-top:.1rem">🌍</span>
+            <div><div style="font-weight:600;margin-bottom:.2rem">Operations</div><div style="color:var(--muted);font-size:.9rem">Global — Remote-first with on-site capability across Africa, Europe, and North America.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:1rem">
+            <span style="font-size:1.3rem;margin-top:.1rem">🕐</span>
+            <div><div style="font-weight:600;margin-bottom:.2rem">Response Time</div><div style="color:var(--muted);font-size:.9rem">We aim to respond to all enquiries within 4 business hours.</div></div>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="openBooking()">📅 Book a Discovery Call</button>
+      </div>
+      <div class="form-wrap fade-in">
+        <h3 style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.5rem">Send a Message</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Full Name</label><input type="text" placeholder="Jane Smith" id="cName2"/></div>
+          <div class="form-group"><label>Company</label><input type="text" placeholder="Acme Corp" id="cCompany2"/></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="jane@company.com" id="cEmail2"/></div>
+        <div class="form-group"><label>Service Interest</label>
+          <select id="cService">
+            <option value="">Select a service...</option>
+            <option>AI Strategy & Readiness</option>
+            <option>Custom AI Development</option>
+            <option>Enterprise AI Integration</option>
+            <option>AI Training & Enablement</option>
+            <option>Multi-Agent Systems</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Describe your AI challenge or goal..." id="cMessage2"></textarea></div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="cRobot2"/>
+          <label for="cRobot2">I'm not a robot, and I agree to be contacted by Coratech AI.</label>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitContact2()">Send Message →</button>
+        <div class="form-success" id="formSuccess2">✅ Message sent successfully! We'll be in touch within 4 business hours.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== BOOKING MODAL ===================== -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <div class="modal-close" onclick="closeBooking()">✕</div>
+    <div id="bookingForm">
+      <h2>Book a <span class="hl">Call</span></h2>
+      <p>Choose the type of session that best fits your needs, then pick a date and time.</p>
+      <div class="booking-types">
+        <div class="booking-type" id="bt0" onclick="selectBookingType(0)"><h4>Intro Call</h4><span>15 min</span></div>
+        <div class="booking-type selected" id="bt1" onclick="selectBookingType(1)"><h4>Discovery Call</h4><span>30 min</span></div>
+        <div class="booking-type" id="bt2" onclick="selectBookingType(2)"><h4>Strategy Session</h4><span>60 min</span></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+        <div style="font-size:.9rem;font-weight:600" id="calMonth"></div>
+        <div style="display:flex;gap:.5rem">
+          <button onclick="changeMonth(-1)" style="background:var(--glass);border:1px solid var(--border);color:var(--muted);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:.9rem;transition:.2s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">‹</button>
+          <button onclick="changeMonth(1)" style="background:var(--glass);border:1px solid var(--border);color:var(--muted);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:.9rem;transition:.2s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">›</button>
+        </div>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="time-slots" id="timeSlots" style="display:none"></div>
+      <div class="form-group" id="bookingName" style="display:none"><label>Your Name</label><input type="text" placeholder="Jane Smith" id="bName"/></div>
+      <div class="form-group" id="bookingEmail" style="display:none"><label>Email Address</label><input type="email" placeholder="jane@company.com" id="bEmail"/></div>
+      <button class="btn-primary" id="confirmBookingBtn" style="width:100%;justify-content:center;display:none;margin-top:.5rem" onclick="confirmBooking()">Confirm Booking →</button>
+    </div>
+    <div class="booking-confirm" id="bookingConfirm">
+      <div class="check">✅</div>
+      <h3>Booking Confirmed!</h3>
+      <p>Thank you! Your session has been booked. Our team will send a calendar invite and confirmation to your email address within a few minutes.</p>
+      <p style="margin-top:1rem;font-size:.85rem;color:var(--cyan)">We look forward to speaking with you.</p>
+      <button class="btn-secondary" style="margin-top:2rem" onclick="closeBooking()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="logo" onclick="showPage('home')" style="display:inline-flex;margin-bottom:.5rem">
+        <div class="logo-diamond" style="width:28px;height:28px">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dg3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29b6f6"/><stop offset="100%" style="stop-color:#1565c0"/></linearGradient></defs><path d="M20 2L38 20L20 38L2 20Z" fill="url(#dg3)"/><path d="M20 12L29 20L20 28L11 20Z" fill="#0d1b2e" opacity="0.7"/></svg>
+        </div>
+        <span class="logo-text" style="font-size:1rem">Coratech <span>AI</span></span>
+      </a>
+      <p>Bespoke AI solutions for enterprise. Strategy, development, integration, and training — all from one trusted partner.</p>
+      <div class="social-links" style="margin-top:1.5rem">
+        <a href="https://linkedin.com" target="_blank" class="social-link" title="LinkedIn">in</a>
+        <a href="https://twitter.com" target="_blank" class="social-link" title="Twitter / X">𝕏</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#" onclick="showPage('services');return false">AI Strategy</a>
+      <a href="#" onclick="showPage('services');return false">AI Development</a>
+      <a href="#" onclick="showPage('services');return false">AI Integration</a>
+      <a href="#" onclick="showPage('services');return false">AI Training</a>
+      <a href="#" onclick="showPage('services');return false">Multi-Agent Systems</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#" onclick="showPage('about');return false">About Us</a>
+      <a href="#" onclick="showPage('case-studies');return false">Case Studies</a>
+      <a href="#" onclick="showPage('insights');return false">Insights</a>
+      <a href="#" onclick="showPage('public-sector');return false">Public Sector</a>
+      <a href="#" onclick="showPage('contact');return false">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="/cdn-cgi/l/email-protection#fc9499909093bc9f938e9d88999f949d95d29f9391"><span class="__cf_email__" data-cfemail="caa2afa6a6a58aa9a5b8abbeafa9a2aba3e4a9a5a7">[email&#160;protected]</span></a>
+      <a href="tel:+233536026175">+233 536 026 175</a>
+      <a href="#" onclick="openBooking();return false">Book a Call</a>
+      <a href="#" onclick="return false" style="margin-top:1.5rem;font-size:.78rem;letter-spacing:.05em">Privacy Policy</a>
+      <a href="#" onclick="return false" style="font-size:.78rem;letter-spacing:.05em">Terms of Service</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Coratech AI. All rights reserved.</p>
+    <div style="display:flex;gap:1.5rem">
+      <a href="#" style="color:var(--muted);text-decoration:none;font-size:.82rem" onclick="return false">Privacy Policy</a>
+      <a href="#" style="color:var(--muted);text-decoration:none;font-size:.82rem" onclick="return false">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── NAV SCROLL ───────────────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',scrollY>20);
+});
+
+// ─── SPA ROUTING ──────────────────────────────────────────────────────
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('page-'+id);
+  if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+  setTimeout(initFadeIns,100);
+}
+
+// ─── MOBILE MENU ──────────────────────────────────────────────────────
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
+
+// ─── FADE IN OBSERVER ─────────────────────────────────────────────────
+function initFadeIns(){
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
+  }),{threshold:.12});
+  document.querySelectorAll('.fade-in,.fade-in-left').forEach(el=>obs.observe(el));
+}
+initFadeIns();
+
+// ─── ROADMAP ──────────────────────────────────────────────────────────
+const stageData=[
+  {title:'Discovery & Strategy',body:'We spend time deep inside your organisation — mapping processes, interviewing stakeholders, and auditing your data. The output is a clear, prioritised AI opportunity register with ROI estimates, risk assessments, and a recommended implementation sequence.'},
+  {title:'Prototype & Validation',body:'Before we build anything at scale, we create fast, low-cost prototypes of your top 1-3 AI use cases. These are tested against real data and real users. This stage kills bad ideas cheaply and validates good ones with evidence.'},
+  {title:'Architecture Design',body:'With validated prototypes, our architects design the complete technical blueprint — cloud infrastructure, data pipelines, model architecture, integration points, security controls, and monitoring strategy. Nothing is left undefined.'},
+  {title:'Build & Deploy',body:'Our engineering team builds production-grade AI systems with full CI/CD pipelines, automated testing, staging environments, and rollout plans. We deploy to your infrastructure and manage the go-live process end to end.'},
+  {title:'Ongoing Support',body:'AI systems need continuous care. We provide SLA-backed monitoring, model drift detection, performance reporting, retraining pipelines, and a dedicated customer success manager — so your AI keeps delivering as your business evolves.'}
+];
+let activeStage=0;
+function selectStage(i){
+  activeStage=i;
+  document.querySelectorAll('.rm-step').forEach((s,idx)=>s.classList.toggle('active',idx===i));
+  document.getElementById('rmContent').innerHTML=`<h3>${stageData[i].title}</h3><p>${stageData[i].body}</p>`;
+}
+selectStage(0);
+
+// ─── INDUSTRY DETAIL ──────────────────────────────────────────────────
+const industryData={
+  transport:{icon:'🚛',name:'Transport & Logistics',overview:'AI is fundamentally reshaping transport and logistics — from intelligent routing to predictive maintenance and demand forecasting. We help logistics companies deploy AI that cuts costs, improves reliability, and delights customers.',
+    cases:[{t:'Route Optimisation AI',d:'Dynamic routing algorithms that reduce fuel consumption and delivery times by up to 30% in real time.'},{t:'Demand Forecasting',d:'ML models that predict shipment volumes with 95%+ accuracy, enabling better resource planning.'},{t:'Predictive Maintenance',d:'IoT + ML systems that predict fleet failures before they occur, reducing downtime by up to 60%.'},{t:'Freight Matching Agent',d:'AI agents that automatically match loads with carriers, optimising capacity and margins.'}]},
+  finance:{icon:'💹',name:'Finance',overview:'Financial services institutions face intense pressure on margins, compliance, and customer expectations. Our AI solutions help financial organisations automate intelligently, manage risk proactively, and serve clients at scale.',
+    cases:[{t:'Fraud Detection',d:'Real-time ML models that detect fraudulent transactions with <0.1% false positive rates across millions of daily events.'},{t:'Credit Risk Modelling',d:'Alternative data-powered credit scoring that extends access to credit while maintaining portfolio quality.'},{t:'Regulatory Reporting AI',d:'Automated report generation and data reconciliation, reducing reporting costs by 70%.'},{t:'Algorithmic Trade Signals',d:'ML-driven signals for quantitative trading desks, backtested across 10+ years of market data.'}]},
+  retail:{icon:'🛍️',name:'Retail',overview:'Retail is being redefined by data. AI enables retailers to personalise at scale, optimise inventory intelligently, and understand customers deeply — turning data into competitive advantage.',
+    cases:[{t:'Personalisation Engine',d:'Real-time recommendation systems that increase average order value by 22% and basket size by 18%.'},{t:'Inventory Optimisation',d:'Demand-sensing AI that reduces overstock by 35% and stockouts by 40% across SKUs.'},{t:'Customer Churn Prediction',d:'ML models that identify at-risk customers 30 days before they churn, enabling proactive retention.'},{t:'Dynamic Pricing AI',d:'Pricing algorithms that respond to demand, competition, and inventory in real time.'}]},
+  education:{icon:'🎓',name:'Education',overview:'Education institutions are using AI to improve student outcomes, reduce administrative burden, and personalise learning. We help schools, universities, and EdTech companies deploy AI responsibly and effectively.',
+    cases:[{t:'Student Success Prediction',d:'Early warning systems that identify at-risk students in time for meaningful intervention.'},{t:'Adaptive Learning Paths',d:'AI systems that adjust content difficulty and pacing to individual student performance in real time.'},{t:'Admissions Intelligence',d:'Predictive models that improve admissions outcomes and forecast yield with high accuracy.'},{t:'Content Generation AI',d:'AI tools for educators to create quizzes, summaries, and learning materials at scale.'}]},
+  hospitality:{icon:'🏨',name:'Hospitality',overview:'Hotels, restaurants, and travel companies are using AI to deliver exceptional guest experiences, optimise revenue, and operate more efficiently. We specialise in AI built for the unique dynamics of hospitality.',
+    cases:[{t:'Dynamic Pricing Engine',d:'Revenue management AI that adjusts rates in real time based on demand, events, and competitor pricing.'},{t:'Guest Experience AI',d:'Personalised communication, preferences, and service recommendations throughout the guest journey.'},{t:'Review Intelligence',d:'NLP systems that analyse thousands of reviews to surface actionable insights for operations teams.'},{t:'Booking Optimisation',d:'Predictive models that optimise channel mix, cancellation policy, and overbooking strategy.'}]},
+  realestate:{icon:'🏢',name:'Real Estate',overview:'Property companies and developers are leveraging AI for smarter valuations, tenant risk assessment, and market intelligence. We help real estate firms make faster, more confident decisions with AI.',
+    cases:[{t:'Automated Valuation Model',d:'ML-powered property valuations that update continuously with market data, achieving <3% median error.'},{t:'Lease Intelligence',d:'Document AI that extracts, analyses, and benchmarks lease terms at scale across portfolios.'},{t:'Tenant Risk Scoring',d:'Predictive models that assess tenant default risk using alternative data, reducing arrears.'},{t:'Market Forecasting',d:'AI models that forecast price movements and demand by micro-location up to 18 months ahead.'}]},
+  insurance:{icon:'🛡️',name:'Insurance',overview:'Insurance is one of the highest-potential sectors for AI — from claims automation to underwriting intelligence. We help insurers move faster, reduce costs, and make better decisions with machine learning.',
+    cases:[{t:'Claims Automation',d:'End-to-end claims processing AI that handles 70%+ of low-complexity claims without human intervention.'},{t:'Underwriting AI',d:'ML models that improve risk selection accuracy and reduce loss ratios across personal and commercial lines.'},{t:'Fraud Detection',d:'Network analysis and anomaly detection models that surface suspicious claims with high precision.'},{t:'Customer Lifetime Value',d:'Predictive models that identify high-value customers for retention investment and cross-sell targeting.'}]},
+  legal:{icon:'⚖️',name:'Legal',overview:'Law firms and in-house legal teams are transforming how they work with AI — processing documents faster, conducting deeper due diligence, and delivering more value to clients at lower cost.',
+    cases:[{t:'Contract Intelligence',d:'AI that reads, classifies, and extracts structured data from contracts at the speed of thousands per hour.'},{t:'Due Diligence Automation',d:'M&A and real estate due diligence AI that reduces review time by 85% without sacrificing accuracy.'},{t:'Legal Research AI',d:'LLM-powered research tools that surface relevant precedents and statutes in seconds.'},{t:'e-Discovery AI',d:'Document review and privilege logging systems that cut e-discovery costs by over 60%.'}]},
+  public:{icon:'🏛️',name:'Public Sector',overview:'Government bodies and public institutions use Coratech AI to deliver better citizen services, prevent fraud, and make evidence-based policy decisions — all with full transparency and accountability.',
+    cases:[{t:'Citizen Chatbot',d:'AI-powered 24/7 citizen service agents that handle enquiries, forms, and routing across all channels.'},{t:'Benefits Fraud Detection',d:'Anomaly detection models that identify fraudulent claims, protecting public funds at scale.'},{t:'Demand Forecasting',d:'Predictive models for NHS, local authorities, and emergency services to plan capacity effectively.'},{t:'Policy Impact Modelling',d:'Simulation models that forecast the impact of policy changes before implementation.'}]}
+};
+
+function showIndustry(key){
+  const d=industryData[key];
+  if(!d)return;
+  const cases=d.cases.map(c=>`<div class="use-case"><h4>${c.t}</h4><p>${c.d}</p></div>`).join('');
+  const html=`
+    <button class="back-btn" onclick="showIndustryGrid()" style="margin:0 0 2rem">← Back to Industries</button>
+    <div style="padding:0 5% 5rem">
+      <div style="font-size:3rem;margin-bottom:1rem">${d.icon}</div>
+      <h2>${d.name}</h2>
+      <p style="color:var(--muted);line-height:1.8;max-width:640px;margin-bottom:2.5rem;font-weight:300">${d.overview}</p>
+      <div class="section-label">Use Cases</div>
+      <div class="use-cases" style="margin-bottom:2.5rem">${cases}</div>
+      <div class="section-label">Key Benefits</div>
+      <div class="benefits">
+        <div class="benefit"><div class="b-icon">⚙️</div><h4>Operational Efficiency</h4><p>Automate repetitive tasks and optimise complex processes to reduce cost and increase throughput.</p></div>
+        <div class="benefit"><div class="b-icon">😊</div><h4>Customer Experience</h4><p>Deliver faster, more personalised services that improve satisfaction and loyalty across every touchpoint.</p></div>
+        <div class="benefit"><div class="b-icon">📉</div><h4>Risk Management</h4><p>Detect fraud, predict failures, and surface risks earlier — before they become costly problems.</p></div>
+      </div>
+    </div>`;
+  document.getElementById('industriesGrid').style.display='none';
+  const det=document.getElementById('industryDetail');
+  det.innerHTML=html; det.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showIndustryGrid(){
+  document.getElementById('industriesGrid').style.display='grid';
+  const det=document.getElementById('industryDetail');
+  det.innerHTML=''; det.classList.remove('active');
+}
+
+// ─── BOOKING SYSTEM ───────────────────────────────────────────────────
+let selectedType=1,selectedDay=null,selectedTime=null,calYear,calMonth2;
+const times=['09:00','09:30','10:00','10:30','11:00','11:30','14:00','14:30','15:00','15:30','16:00','16:30'];
+
+function openBooking(){
+  const now=new Date(); calYear=now.getFullYear(); calMonth2=now.getMonth();
+  document.getElementById('bookingModal').classList.add('open');
+  document.getElementById('bookingForm').style.display='block';
+  document.getElementById('bookingConfirm').style.display='none';
+  selectedDay=null; selectedTime=null;
+  renderCalendar(); updateBookingState();
+}
+function closeBooking(){document.getElementById('bookingModal').classList.remove('open')}
+document.getElementById('bookingModal').addEventListener('click',function(e){if(e.target===this)closeBooking()});
+
+function selectBookingType(i){
+  selectedType=i;
+  [0,1,2].forEach(j=>document.getElementById('bt'+j).classList.toggle('selected',j===i));
+}
+const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function changeMonth(d){
+  calMonth2+=d;
+  if(calMonth2>11){calMonth2=0;calYear++}
+  if(calMonth2<0){calMonth2=11;calYear--}
+  renderCalendar();
+}
+function renderCalendar(){
+  document.getElementById('calMonth').textContent=monthNames[calMonth2]+' '+calYear;
+  const grid=document.getElementById('calGrid');
+  const now=new Date(); const todayD=now.getDate(),todayM=now.getMonth(),todayY=now.getFullYear();
+  const firstDay=new Date(calYear,calMonth2,1).getDay();
+  const daysInMonth=new Date(calYear,calMonth2+1,0).getDate();
+  let html=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div class="cal-day-name">${d}</div>`).join('');
+  for(let i=0;i<firstDay;i++) html+=`<div class="cal-day empty"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const isPast=(calYear<todayY)||(calYear===todayY&&calMonth2<todayM)||(calYear===todayY&&calMonth2===todayM&&d<todayD);
+    const isSel=selectedDay===d;
+    const cls=`cal-day${isPast?' past':''}${isSel?' selected':''}`;
+    html+=`<div class="${cls}"${!isPast?` onclick="selectDay(${d})"`:''}>${d}</div>`;
+  }
+  grid.innerHTML=html;
+}
+function selectDay(d){
+  selectedDay=d; renderCalendar();
+  const ts=document.getElementById('timeSlots');
+  ts.style.display='grid';
+  ts.innerHTML=times.map(t=>`<div class="time-slot${selectedTime===t?' selected':''}" onclick="selectTime('${t}')">${t}</div>`).join('');
+  updateBookingState();
+}
+function selectTime(t){
+  selectedTime=t;
+  document.querySelectorAll('.time-slot').forEach(el=>el.classList.toggle('selected',el.textContent===t));
+  updateBookingState();
+}
+function updateBookingState(){
+  const show=selectedDay&&selectedTime;
+  document.getElementById('bookingName').style.display=show?'flex':'none';
+  document.getElementById('bookingEmail').style.display=show?'flex':'none';
+  document.getElementById('confirmBookingBtn').style.display=show?'flex':'none';
+}
+function confirmBooking(){
+  const n=document.getElementById('bName').value.trim();
+  const e=document.getElementById('bEmail').value.trim();
+  if(!n||!e){alert('Please enter your name and email.');return}
+  document.getElementById('bookingForm').style.display='none';
+  document.getElementById('bookingConfirm').style.display='block';
+}
+
+// ─── CONTACT FORMS ────────────────────────────────────────────────────
+function submitContact(){
+  const n=document.getElementById('cName').value.trim();
+  const e=document.getElementById('cEmail').value.trim();
+  const m=document.getElementById('cMessage').value.trim();
+  const r=document.getElementById('cRobot').checked;
+  if(!n||!e||!m){alert('Please fill in all fields.');return}
+  if(!r){alert('Please confirm you are not a robot.');return}
+  document.getElementById('formSuccess').style.display='block';
+  ['cName','cEmail','cMessage','cCompany'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  document.getElementById('cRobot').checked=false;
+}
+function submitContact2(){
+  const n=document.getElementById('cName2').value.trim();
+  const e=document.getElementById('cEmail2').value.trim();
+  const m=document.getElementById('cMessage2').value.trim();
+  const r=document.getElementById('cRobot2').checked;
+  if(!n||!e||!m){alert('Please fill in all fields.');return}
+  if(!r){alert('Please confirm you are not a robot.');return}
+  document.getElementById('formSuccess2').style.display='block';
+  ['cName2','cEmail2','cMessage2','cCompany2'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  document.getElementById('cRobot2').checked=false;
+}
+</script>
+</body>
+</html>
