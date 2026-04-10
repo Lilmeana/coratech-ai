@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
 :root{
   --bg:#080c14;--bg2:#0c1220;--navy:#0d1b2e;--navy2:#0a1628;
@@ -362,32 +362,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
 .back-btn{display:inline-flex;align-items:center;gap:.5rem;color:var(--accent2);font-size:.9rem;font-weight:600;cursor:pointer;margin:3rem 5% 0;transition:.2s;background:none;border:none}
 .back-btn:hover{gap:.8rem}
 
-
-/* RECAPTCHA */
-.g-recaptcha{margin:1rem 0;}
-@media(max-width:400px){.g-recaptcha{transform:scale(0.85);transform-origin:left top;}}
 /* SCROLL ANIMATIONS */
 .fade-in{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
 .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}.stagger-5{transition-delay:.5s}
 
 /* RESPONSIVE */
-@media(max-width:1000px){
-  .cs-card{grid-template-columns:1fr}
-  .cs-img{min-height:200px}
-}
-@media(max-width:900px){
-  .footer-grid{grid-template-columns:1fr 1fr}
-  .form-row{grid-template-columns:1fr}
-  .cs-sections{grid-template-columns:1fr}
-  .service-detail{grid-template-columns:1fr}
-  .about-grid{grid-template-columns:1fr}
-  .insight-card{grid-template-columns:1fr}
-  .benefits{grid-template-columns:1fr 1fr}
-  .booking-types{grid-template-columns:1fr}
-  .mission-vision{grid-template-columns:1fr}
-  .img-card-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-}
+
+
 /* ===== CHATBOT ===== */
 #chatbot-btn{position:fixed;bottom:28px;right:28px;z-index:3000;width:60px;height:60px;background:var(--grad);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(99,102,241,.5);transition:all .3s}
 #chatbot-btn:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(99,102,241,.7)}
@@ -423,8 +405,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
 .cb-lead-form input:focus{border-color:var(--accent)}
 .cb-lead-submit{background:var(--grad);border:none;color:#fff;border-radius:100px;padding:.6rem 1.2rem;font-size:.85rem;font-weight:600;cursor:pointer;transition:.2s}
 .cb-lead-submit:hover{opacity:.85}
-@media(max-width:480px){#chatbot-window{width:calc(100vw - 32px);right:16px;bottom:92px}}
-@media(max-width:480px){#chatbot-btn{bottom:20px;right:20px}}
+
+
 
 /* ===== WHY AI SECTION ===== */
 .why-ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.25rem;margin-top:2.5rem}
@@ -470,20 +452,270 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
 /* ===== ENHANCED FAQ ===== */
 .faq-enhanced .faq-q span:first-child{font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600}
 
-/* ===== MOBILE IMPROVEMENTS ===== */
-@media(max-width:700px){
+
+
+/* ══════════════════════════════════════════════════════
+   FULL RESPONSIVE SYSTEM — Coratech AI
+   Breakpoints: 1100 | 900 | 768 | 600 | 480 | 380
+══════════════════════════════════════════════════════ */
+
+/* ── 1100px: hide hero visual card ── */
+@media(min-width:1100px){.hero-visual{display:block}}
+
+/* ── 1000px: case study cards ── */
+@media(max-width:1000px){
+  .cs-card{grid-template-columns:1fr}
+  .cs-img{min-height:200px}
+}
+
+/* ── 900px: most two-column grids collapse ── */
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .cs-sections{grid-template-columns:1fr}
+  .service-detail{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .insight-card{grid-template-columns:1fr}
+  .benefits{grid-template-columns:1fr 1fr}
+  .booking-types{grid-template-columns:1fr}
+  .mission-vision{grid-template-columns:1fr}
+  .img-card-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+  .why-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+  .ind-detail-grid{grid-template-columns:1fr}
+}
+
+/* ── 768px: tablet adjustments ── */
+@media(max-width:768px){
+  section{padding:5rem 5%}
+  .page-header{padding:8rem 5% 3.5rem}
+  .hero{padding-top:72px}
+  .hero h1{font-size:clamp(2rem,6vw,3rem)}
+  .hero-btns{flex-direction:column;gap:.75rem}
+  .hero-btns .btn-primary,.hero-btns .btn-secondary{width:100%;justify-content:center}
+  .hero-stats{gap:1.5rem;flex-wrap:wrap}
+  .cta-band{padding:3.5rem 2.5rem;margin:0 4% 5rem}
+  .cta-band h2{font-size:clamp(1.5rem,4vw,2.2rem)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
+  .services-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
   .why-ai-grid{grid-template-columns:repeat(2,1fr)}
-  .hero-stats{gap:1.2rem}
-  .hero-stats .stat-num{font-size:2rem}
-  .article-body{padding:3rem 5%}
-  .article-hero{padding:8rem 5% 3rem}
-  #chatbot-window{bottom:88px}
-  .cb-quick-btns{gap:.4rem}
-  .cb-quick{font-size:.73rem;padding:.4rem .75rem}
+  .blog-grid{grid-template-columns:1fr}
+  .insights-grid{grid-template-columns:1fr}
+  .contact-layout{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
 }
-@media(max-width:400px){
+
+/* ── 600px: main mobile breakpoint ── */
+@media(max-width:600px){
+  /* NAV: hide links, show hamburger */
+  nav .nav-links,.nav-cta{display:none!important}
+  .hamburger{display:flex!important}
+
+  /* General layout */
+  body{overflow-x:hidden}
+  section{padding:4rem 5%}
+  .page-header{padding:7rem 5% 3rem}
+
+  /* Hero */
+  .hero{padding:72px 5% 3rem;min-height:auto;align-items:flex-start;padding-top:calc(72px + 2rem)}
+  .hero-content{max-width:100%}
+  .hero h1{font-size:clamp(1.8rem,7vw,2.5rem);line-height:1.15}
+  .hero-rotating-wrap{height:1.4em}
+  .hero p{font-size:.95rem}
+  .hero-btns{flex-direction:column;gap:.7rem;width:100%}
+  .hero-btns .btn-primary,.hero-btns .btn-secondary{width:100%;justify-content:center;padding:.8rem 1.5rem;font-size:.9rem}
+  .hero-stats{gap:1rem;margin-top:2.5rem;display:grid;grid-template-columns:repeat(2,1fr)}
+  .stat-num{font-size:2rem!important}
+  .stat-label{font-size:.7rem}
+  .hero-visual{display:none!important}
+
+  /* Section headers */
+  .section-title{font-size:clamp(1.5rem,5vw,2rem)}
+  .section-sub{font-size:.92rem}
+
+  /* Grids → single column */
+  .services-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
   .why-ai-grid{grid-template-columns:1fr}
+  .img-card-grid{grid-template-columns:1fr}
+  .blog-grid{grid-template-columns:1fr}
+  .insights-grid{grid-template-columns:1fr}
+  .industries-grid{grid-template-columns:1fr;padding:2rem 5%}
+  .cs-list{padding:1.5rem 5%}
+  .cs-card{grid-template-columns:1fr}
+  .cs-img{min-height:180px}
+  .cs-body{padding:1.5rem}
+  .cs-sections{grid-template-columns:1fr;gap:1rem}
+  .services-list{padding:2rem 5%}
+  .service-detail{grid-template-columns:1fr;padding:1.5rem;gap:1.5rem}
+  .ind-detail-grid{grid-template-columns:1fr}
+  .benefits{grid-template-columns:1fr;gap:.75rem}
+  .use-cases{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:1.5rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:.75rem}
+  .footer-bottom div{flex-wrap:wrap;gap:.75rem}
+  .mission-vision{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem}
+  .form-row{grid-template-columns:1fr}
+  .booking-types{grid-template-columns:1fr}
+  .about-content{padding:2rem 5%}
+  .insights-content{padding:2rem 5%}
+  .ps-grid{grid-template-columns:1fr}
+  .ps-content{padding:2rem 5%}
+
+  /* CTA band */
+  .cta-band{padding:3rem 1.5rem;border-radius:20px;margin:0 3% 4rem}
+  .cta-band h2{font-size:clamp(1.4rem,5vw,2rem)}
+  .cta-band p{font-size:.9rem}
+  .cta-band .btn-primary{width:100%;justify-content:center}
+
+  /* Cards */
+  .svc-card{padding:1.5rem}
+  .why-card{padding:1.75rem}
+  .why-ai-card{padding:1.5rem}
+  .img-card{height:220px}
+  .ins-card h3{font-size:.88rem}
+  .blog-card h3{font-size:.9rem}
+  .faq-list{max-width:100%}
+
+  /* Forms */
+  .form-wrap{padding:1.75rem}
+  .form-group input,.form-group textarea,.form-group select{font-size:.88rem}
+
+  /* Page headers */
+  .page-header h1{font-size:clamp(1.6rem,6vw,2.4rem)}
+  .page-header p{font-size:.92rem}
+
+  /* Contact page: stack columns */
+  #page-contact section>div[style]{display:flex!important;flex-direction:column!important;gap:2.5rem!important}
+
+  /* Modal */
+  .modal{padding:1.75rem;border-radius:20px}
+  .modal h2{font-size:1.3rem}
+  .booking-types{gap:.5rem}
+  .booking-type{padding:.9rem}
+
+  /* Article pages */
+  .article-hero{padding:7rem 5% 2.5rem}
+  .article-body{padding:2rem 5%}
+  .article-body h2{font-size:1.25rem}
+  .article-callout{padding:1.25rem 1.5rem}
+
+  /* Chatbot */
+  #chatbot-window{width:calc(100vw - 24px);right:12px;bottom:84px;max-height:70vh;border-radius:18px}
+  #chatbot-btn{bottom:16px;right:16px;width:52px;height:52px}
+  .cb-quick{font-size:.72rem;padding:.38rem .7rem}
+  .cb-quick-btns{gap:.35rem;padding:.5rem 1rem .6rem}
+  .cb-msg{font-size:.82rem}
+  .cb-input{font-size:.82rem}
+
+  /* reCAPTCHA scaling */
+  .g-recaptcha{transform:scale(0.88);transform-origin:left top;margin-bottom:.5rem}
 }
+
+/* ── 480px: small phones ── */
+@media(max-width:480px){
+  .hero h1{font-size:clamp(1.65rem,8vw,2rem)}
+  .stat-num{font-size:1.75rem!important}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:.75rem}
+  .section-title{font-size:clamp(1.35rem,5.5vw,1.75rem)}
+  .cta-band{padding:2.5rem 1.25rem}
+  .modal{padding:1.5rem}
+  .booking-type h4{font-size:.8rem}
+  .booking-type span{font-size:.7rem}
+  .why-ai-card{text-align:left;display:flex;flex-direction:column;align-items:flex-start}
+  .why-ai-icon{margin:0 0 .9rem}
+  #chatbot-window{max-height:75vh}
+  .g-recaptcha{transform:scale(0.82);transform-origin:left top}
+}
+
+/* ── 380px: very small phones ── */
+@media(max-width:380px){
+  .hero h1{font-size:1.55rem}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:.5rem}
+  .stat-num{font-size:1.6rem!important}
+  nav{padding:0 4%}
+  .hero{padding-left:4%;padding-right:4%}
+  section{padding:3rem 4%}
+  .modal{padding:1.25rem}
+  .form-wrap{padding:1.5rem}
+}
+
+/* ── MOBILE MENU FULL SCREEN ── */
+.mobile-menu{
+  display:none;
+  position:fixed;inset:0;
+  background:var(--bg);
+  z-index:2000;
+  padding:0;
+  flex-direction:column;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.mobile-menu.open{display:flex}
+.mob-menu-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1.2rem 1.5rem;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.mob-menu-links{
+  flex:1;
+  overflow-y:auto;
+  padding:0.5rem 0;
+}
+.mobile-menu a{
+  color:var(--white);
+  text-decoration:none;
+  font-size:1.1rem;
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  padding:1rem 1.5rem;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  transition:background .2s,color .2s;
+}
+.mobile-menu a:hover,.mobile-menu a:active{
+  background:rgba(99,102,241,.08);
+  color:var(--cyan);
+}
+.mobile-menu a .mob-arrow{
+  font-size:.8rem;
+  color:var(--muted);
+  opacity:.6;
+}
+.mob-menu-footer{
+  padding:1.5rem;
+  flex-shrink:0;
+  border-top:1px solid var(--border);
+}
+.mob-x-btn{
+  background:var(--glass);
+  border:1px solid var(--border);
+  width:40px;height:40px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  color:var(--muted);
+  font-size:1.1rem;
+  transition:.2s;
+  flex-shrink:0;
+}
+.mob-x-btn:hover{color:var(--white);border-color:var(--accent)}
+
+/* Hamburger animation */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;z-index:1001}
+.hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* Prevent scroll when menu open */
+body.menu-open{overflow:hidden}
+
 </style>
 </head>
 <body>
@@ -525,19 +757,32 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
     <li><a href="#" onclick="showPage('contact');return false">Contact</a></li>
   </ul>
   <button class="nav-cta" onclick="openBooking()">Book a Call</button>
-  <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mob-x" onclick="toggleMenu()">&#x2715;</div>
-  <a href="#" onclick="showPage('services');toggleMenu();return false">Services</a>
-  <a href="#" onclick="showPage('case-studies');toggleMenu();return false">Case Studies</a>
-  <a href="#" onclick="showPage('industries');toggleMenu();return false">Industries</a>
-  <a href="#" onclick="showPage('about');toggleMenu();return false">About Us</a>
-  <a href="#" onclick="showPage('insights');toggleMenu();return false">Insights</a>
-  <a href="#" onclick="showPage('contact');toggleMenu();return false">Contact</a>
-  <button class="btn-primary" style="margin-top:1.5rem;justify-content:center;width:100%" onclick="openBooking();toggleMenu()">Book a Discovery Call</button>
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mob-menu-header">
+    <a class="logo" onclick="showPage('home');closeMobileMenu()" style="text-decoration:none">
+      <div class="logo-diamond" style="width:28px;height:28px">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dg-mob" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29b6f6"/><stop offset="100%" style="stop-color:#6366f1"/></linearGradient></defs><path d="M20 2L38 20L20 38L2 20Z" fill="url(#dg-mob)"/><path d="M20 12L29 20L20 28L11 20Z" fill="#080c14" opacity=".7"/></svg>
+      </div>
+      <span class="logo-text" style="font-size:1.1rem">Coratech <span>AI</span></span>
+    </a>
+    <button class="mob-x-btn" onclick="closeMobileMenu()" aria-label="Close menu">&#x2715;</button>
+  </div>
+  <div class="mob-menu-links">
+    <a href="#" onclick="showPage('services');closeMobileMenu();return false">Services<span class="mob-arrow">&#8250;</span></a>
+    <a href="#" onclick="showPage('case-studies');closeMobileMenu();return false">Case Studies<span class="mob-arrow">&#8250;</span></a>
+    <a href="#" onclick="showPage('industries');closeMobileMenu();return false">Industries<span class="mob-arrow">&#8250;</span></a>
+    <a href="#" onclick="showPage('about');closeMobileMenu();return false">About Us<span class="mob-arrow">&#8250;</span></a>
+    <a href="#" onclick="showPage('insights');closeMobileMenu();return false">Insights<span class="mob-arrow">&#8250;</span></a>
+    <a href="#" onclick="showPage('contact');closeMobileMenu();return false">Contact<span class="mob-arrow">&#8250;</span></a>
+    <a href="#" onclick="showPage('faq-page');closeMobileMenu();return false">FAQ<span class="mob-arrow">&#8250;</span></a>
+  </div>
+  <div class="mob-menu-footer">
+    <button class="btn-primary" style="width:100%;justify-content:center;font-size:.95rem" onclick="openBooking();closeMobileMenu()">Book a Free Discovery Call</button>
+  </div>
 </div>
 
 <!-- ===== HOME ===== -->
@@ -572,7 +817,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
       </h1>
       <p>Whether you're just starting to explore AI or you're ready to scale, we help you find the right solutions, build them properly, and make them work for your business.</p>
       <div class="hero-btns">
-        <button class="btn-primary" onclick="openBooking()">Book a Free Discovery Call</button>
+        <button class="btn-primary" onclick="openBooking()"> Book a Free Discovery Call</button>
         <button class="btn-secondary" onclick="showPage('services')">Explore Services</button>
       </div>
       <div class="hero-stats">
@@ -649,13 +894,13 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
         <div class="img-card-body"><span class="img-card-icon"><span class="material-symbols-outlined" style="font-size:1.3rem;color:#fff">search</span></span><h3>AI Discovery</h3><p>Deep audit of your processes, data assets, and AI opportunity landscape to identify highest-ROI entry points.</p></div>
       </div>
       <div class="img-card fade-in stagger-2">
-        <img src="https://images.pexels.com/photos/9430883/pexels-photo-9430883.jpeg" alt="Strategy"/>
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80" alt="Strategy"/>
         <div class="img-card-overlay"></div>
         <span class="img-card-num">02</span>
         <div class="img-card-body"><span class="img-card-icon"><span class="material-symbols-outlined" style="font-size:1.3rem;color:#fff">flag</span></span><h3>Strategy &amp; Planning</h3><p>A bespoke AI roadmap with investment phasing, risk modelling, governance design, and success metrics.</p></div>
       </div>
       <div class="img-card fade-in stagger-3">
-        <img src="https://images.pexels.com/photos/14920871/pexels-photo-14920871.jpeg" alt="Design"/>
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80" alt="Design"/>
         <div class="img-card-overlay"></div>
         <span class="img-card-num">03</span>
         <div class="img-card-body"><span class="img-card-icon"><span class="material-symbols-outlined" style="font-size:1.3rem;color:#fff">draw</span></span><h3>Design &amp; Prototyping</h3><p>Rapid prototypes validated against real data — proving value before committing to full-scale development.</p></div>
@@ -705,7 +950,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
       </div>
       <div class="cs-card fade-in">
         <div class="cs-img">
-          <img src="https://images.pexels.com/photos/34803966/pexels-photo-34803966.jpeg" alt="Legal AI"/>
+          <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=700&q=80" alt="Legal AI"/>
           <div class="cs-img-overlay"></div>
           <span class="cs-img-label">Case Study 02</span>
         </div>
@@ -867,7 +1112,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
   <div class="cta-band fade-in">
     <h2 style="color:var(--white)">Ready to work <span style="color:var(--cyan)">smarter</span>?</h2>
     <p>Businesses like yours are already saving time, cutting costs, and growing faster with the right AI in place. Let's find out what's possible for you.</p>
-    <button class="btn-primary" type="button" onclick="openBooking()">Book Your Free Strategy Session</button>
+    <button class="btn-primary" type="button" onclick="openBooking()"> Book Your Free Strategy Session</button>
   </div>
 
 
@@ -885,7 +1130,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
     <!-- SME CASE 1 -->
     <div class="cs-card fade-in">
       <div class="cs-img">
-        <img src="https://images.pexels.com/photos/32529341/pexels-photo-32529341.jpeg" alt="Compliance AI"/>
+        <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=700&q=80" alt="Compliance AI"/>
         <div class="cs-img-overlay"></div>
         <span class="cs-img-label">Case Study 01</span>
       </div>
@@ -927,7 +1172,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
     <!-- SME CASE 3 -->
     <div class="cs-card fade-in">
       <div class="cs-img">
-        <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg" alt="Knowledge Hub"/>
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80" alt="Knowledge Hub"/>
         <div class="cs-img-overlay"></div>
         <span class="cs-img-label">Case Study 03</span>
       </div>
@@ -969,7 +1214,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
     <!-- EXISTING CASE 5 (amended) -->
     <div class="cs-card fade-in">
       <div class="cs-img">
-        <img src="https://images.pexels.com/photos/7947634/pexels-photo-7947634.jpeg" alt="Financial Services AI"/>
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=80" alt="Financial Services AI"/>
         <div class="cs-img-overlay"></div>
         <span class="cs-img-label">Case Study 05</span>
       </div>
@@ -990,7 +1235,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
     <!-- EXISTING CASE 6 (amended) -->
     <div class="cs-card fade-in">
       <div class="cs-img">
-        <img src="https://images.pexels.com/photos/4968573/pexels-photo-4968573.jpeg" alt="Legal AI"/>
+        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=700&q=80" alt="Legal AI"/>
         <div class="cs-img-overlay"></div>
         <span class="cs-img-label">Case Study 06</span>
       </div>
@@ -1012,7 +1257,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
   <div class="cta-band fade-in" style="margin-bottom:5rem">
     <h2 style="color:var(--white)">Need to deliver <span style="color:var(--cyan)">similar results</span>?</h2>
     <p>Let's explore what's possible in a free 30-minute discovery call.</p>
-    <button class="btn-primary" type="button" onclick="openBooking()">Book a Discovery Call</button>
+    <button class="btn-primary" type="button" onclick="openBooking()"> Book a Discovery Call</button>
   </div>
 </div>
 
@@ -1060,7 +1305,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
       <div class="ind-body"><div class="ind-icon-wrap"><span class="material-symbols-outlined" style="font-size:1.2rem;color:#fff">school</span></div><h3>Education</h3><p>Adaptive learning, student success prediction, content generation, and admin AI.</p></div>
     </div>
     <div class="industry-card fade-in stagger-3" onclick="showIndustry('legal')">
-      <img src="https://images.pexels.com/photos/8730785/pexels-photo-8730785.jpeg" alt="Legal"/>
+      <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=700&q=80" alt="Legal"/>
       <div class="ind-overlay"></div>
       <div class="ind-body"><div class="ind-icon-wrap"><span class="material-symbols-outlined" style="font-size:1.2rem;color:#fff">gavel</span></div><h3>Legal</h3><p>Document review automation, contract intelligence, due diligence AI, and compliance monitoring.</p></div>
     </div>
@@ -1074,7 +1319,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
   <div class="cta-band fade-in" style="margin:2rem 5% 5rem" id="industryCta">
     <h2 style="color:var(--white)">Don't see your sector? <span style="color:var(--cyan)">Let's talk.</span></h2>
     <p>We work across all industries. Book a free call and we'll show you what's possible for your business.</p>
-    <button class="btn-primary" type="button" onclick="openBooking()">Book a Free Discovery Call</button>
+    <button class="btn-primary" type="button" onclick="openBooking()"> Book a Free Discovery Call</button>
   </div>
 </div>
 
@@ -1116,7 +1361,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
   <div class="cta-band fade-in" style="margin:4rem 5% 5rem">
     <h2 style="color:var(--white)">Ready to explore <span style="color:var(--cyan)">what's possible</span>?</h2>
     <p>Book a free discovery call and we'll identify the AI opportunities best suited to your business.</p>
-    <button class="btn-primary" type="button" onclick="openBooking()">Book a Free Discovery Call</button>
+    <button class="btn-primary" type="button" onclick="openBooking()"> Book a Free Discovery Call</button>
   </div>
 </div>
 
@@ -1163,13 +1408,13 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Will my team need technical skills to use what you build?</span><span class="material-symbols-outlined faq-icon">expand_more</span></button><div class="faq-a"><p>No. We design all of our solutions to be usable by non-technical staff. Whether it's a chatbot, a knowledge hub, or an analytics dashboard, the interfaces are intuitive and require no coding knowledge. We also provide training and documentation as part of every project.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>How much does it cost?</span><span class="material-symbols-outlined faq-icon">expand_more</span></button><div class="faq-a"><p>Costs vary depending on the scope and complexity of the solution. We offer fixed-fee project pricing as well as ongoing retainer arrangements. Our discovery call is completely free, and we'll always give you a clear proposal before any work begins — no surprises.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Is my data safe?</span><span class="material-symbols-outlined faq-icon">expand_more</span></button><div class="faq-a"><p>Yes. Data security is a core part of how we design every solution. We follow best practices for data handling, access controls, and encryption. We can work with your data in your own cloud environment, ensuring it never leaves your control unless you explicitly choose otherwise.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Do you work with businesses outside the Country?</span><span class="material-symbols-outlined faq-icon">expand_more</span></button><div class="faq-a"><p>Yes. Coratech AI is a remote-first consultancy with the capability to work with businesses globally. We currently have clients across Africa, Europe, and North America, and we're always open to working with businesses wherever they are based.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Do you work with businesses outside the UK?</span><span class="material-symbols-outlined faq-icon">expand_more</span></button><div class="faq-a"><p>Yes. Coratech AI is a remote-first consultancy with the capability to work with businesses globally. We currently have clients across Africa, Europe, and North America, and we're always open to working with businesses wherever they are based.</p></div></div>
     </div>
 
     <div class="cta-band fade-in" style="margin:0 0 5rem">
       <h2 style="color:var(--white)">Want to learn more? <span style="color:var(--cyan)">Let's talk.</span></h2>
       <p>Book a free, no-obligation discovery call and let's explore what AI can do for your business.</p>
-      <button class="btn-primary" type="button" onclick="openBooking()">Book a Free Discovery Call</button>
+      <button class="btn-primary" type="button" onclick="openBooking()"> Book a Free Discovery Call</button>
     </div>
   </div>
 </div>
@@ -1236,7 +1481,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
     <div class="cta-band fade-in" style="margin:0 0 3rem">
       <h2>Partnering with <span class="hl">government</span> to deliver more</h2>
       <p>We hold G-Cloud and Crown Commercial Service frameworks. Let's discuss how AI can serve your citizens better.</p>
-      <button class="btn-primary" onclick="openBooking()">Schedule a Public Sector Briefing</button>
+      <button class="btn-primary" onclick="openBooking()"> Schedule a Public Sector Briefing</button>
     </div>
   </div>
 </div>
@@ -1249,12 +1494,12 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
     <p>Take the first step to working smarter with AI and Automation. Contact us or book a no obligation discovery call. No hard sell. Just a genuine conversation about what's possible.</p>
   </div>
   <section>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+    <div class="contact-layout" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
             <div class="fade-in">
         <h3 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem">Reach Us</h3>
         <div class="ci-row">
           <span class="ci-icon"><span class="material-symbols-outlined" style="font-size:1.4rem;color:var(--cyan)">mail</span></span>
-          <div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:hello@coratechai.com" style="color:var(--muted)">hello@coratechai.com</a></div></div>
+          <div><div class="ci-label">Email</div><div class="ci-val"><a href="/cdn-cgi/l/email-protection#deb6bbb2b2b19ebdb1acbfaabbbdb6bfb7f0bdb1b3" style="color:var(--muted)"><span class="__cf_email__" data-cfemail="8fe7eae3e3e0cfece0fdeefbeaece7eee6a1ece0e2">[email&#160;protected]</span></a></div></div>
         </div>
         <div class="ci-row">
           <span class="ci-icon"><span class="material-symbols-outlined" style="font-size:1.4rem;color:var(--cyan)">calendar_month</span></span>
@@ -1272,9 +1517,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
         </div>
         <div class="form-group"><label>Email Address <span style="color:var(--cyan)">*</span></label><input type="email" placeholder="Your email" id="cEmail2" required/></div>
         <div class="form-group"><label>Message <span style="color:var(--cyan)">*</span></label><textarea placeholder="Describe your enquiry or goal" id="cMessage2" required></textarea></div>
-        <div class="g-recaptcha" data-sitekey="6Le6eq8sAAAAAKeWBlhXBGc7BNeCG_U822GLVdrR" style="margin-bottom:1rem"></div>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAABkMYinukE8nw9F" style="margin-bottom:1rem"></div>
         <button class="btn-primary" type="button" style="width:100%;justify-content:center" onclick="submitContact2()">Send Message</button>
-        <div class="form-success" id="formSuccess2">Message sent — thank you! We'll be in touch with you shortly.</div>
+        <div class="form-success" id="formSuccess2"> Message sent! We'll be in touch soon.</div>
       </div>
     </div>
   </section>
@@ -1296,7 +1541,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Is AI too expensive for a small business?</span><span class="material-symbols-outlined faq-icon">expand_more</span></button><div class="faq-a"><p>This is one of the biggest misconceptions we come across. AI has become dramatically more affordable over the past few years. We work with SMEs and startups specifically, and we size our solutions and pricing accordingly. We offer fixed-fee projects with no hidden costs, and you'll always know exactly what you're paying for before we start. Most clients see a clear return on their investment within the first few months.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Is my data safe?</span><span class="material-symbols-outlined faq-icon">expand_more</span></button><div class="faq-a"><p>Yes — data security is built into everything we do. We follow GDPR best practices and, wherever possible, we build solutions that run entirely within your own cloud environment. That means your data stays under your control at all times. We're happy to discuss our data handling approach in detail during our first call.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What happens after we go live?</span><span class="material-symbols-outlined faq-icon">expand_more</span></button><div class="faq-a"><p>We don't hand over the keys and disappear. Every project includes ongoing support, monitoring, and a clear point of contact for any questions. As your business evolves and your needs change, we're there to make updates and improvements. We want the AI we build to keep delivering value for you — not just on launch day.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Do you work with businesses outside the Country?</span><span class="material-symbols-outlined faq-icon">expand_more</span></button><div class="faq-a"><p>Yes, absolutely. We're a remote-first team and we work with businesses across Africa, Europe, and beyond. Our founders have backgrounds spanning multiple continents, and we're comfortable working across time zones and industries. If you're based outside the Country, that's no barrier at all to working with us.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Do you work with businesses outside the UK?</span><span class="material-symbols-outlined faq-icon">expand_more</span></button><div class="faq-a"><p>Yes, absolutely. We're a remote-first team and we work with businesses across Africa, Europe, and beyond. Our founders have backgrounds spanning multiple continents, and we're comfortable working across time zones and industries. If you're based outside the UK, that's no barrier at all to working with us.</p></div></div>
     </div>
     <div class="cta-band fade-in" style="margin:0 0 5rem">
       <h2 style="color:var(--white)">Still have a question? <span style="color:var(--cyan)">Just ask.</span></h2>
@@ -1315,7 +1560,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
   </div>
   <div style="padding:3rem 5%;max-width:860px">
     <h2 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:1rem;color:var(--white)">Who we are</h2>
-    <p style="color:var(--muted);line-height:1.9;margin-bottom:1.5rem">Coratech AI is a trading name of Canmore Digital. We provide AI consulting and implementation services to businesses. Our contact email is <a href="mailto:hello@coratechai.com" style="color:var(--muted)">hello@coratechai.com</a>.</p>
+    <p style="color:var(--muted);line-height:1.9;margin-bottom:1.5rem">Coratech AI is a trading name of Canmore Digital. We provide AI consulting and implementation services to businesses. Our contact email is <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f8909d949497b89b978a998c9d9b909991d69b9795">[email&#160;protected]</a>.</p>
     <h2 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:1rem;color:var(--white)">What information we collect</h2>
     <p style="color:var(--muted);line-height:1.9;margin-bottom:1rem">When you contact us, book a call, or submit a form on this website, we may collect:</p>
     <ul style="color:var(--muted);line-height:1.9;padding-left:1.5rem;margin-bottom:1.5rem">
@@ -1340,11 +1585,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
       <li>Ask us to correct or delete your data</li>
       <li>Withdraw consent for marketing communications at any time</li>
     </ul>
-    <p style="color:var(--muted);line-height:1.9;margin-bottom:2rem">To exercise any of these rights, please email us at <a href="mailto:hello@coratechai.com" style="color:var(--muted)">hello@coratechai.com</a>.</p>
+    <p style="color:var(--muted);line-height:1.9;margin-bottom:2rem">To exercise any of these rights, please email us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cba3aea7a7a48ba8a4b9aabfaea8a3aaa2e5a8a4a6">[email&#160;protected]</a>.</p>
     <h2 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:1rem;color:var(--white)">Cookies</h2>
     <p style="color:var(--muted);line-height:1.9;margin-bottom:2rem">This website uses minimal cookies for functionality and anonymous analytics only. We do not use advertising or tracking cookies.</p>
     <h2 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:1rem;color:var(--white)">Contact</h2>
-    <p style="color:var(--muted);line-height:1.9;margin-bottom:3rem">If you have any questions about this policy, please contact us at <a href="mailto:hello@coratechai.com" style="color:var(--muted)">hello@coratechai.com</a>.</p>
+    <p style="color:var(--muted);line-height:1.9;margin-bottom:3rem">If you have any questions about this policy, please contact us at <a href="/cdn-cgi/l/email-protection#d3bbb6bfbfbc93b0bca1b2a7b6b0bbb2bafdb0bcbe" style="color:var(--cyan)"><span class="__cf_email__" data-cfemail="472f222b2b2807242835263322242f262e6924282a">[email&#160;protected]</span></a>.</p>
     <button class="btn-secondary" onclick="history.back()||showPage('home')">Back</button>
   </div>
 </div>
@@ -1376,11 +1621,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
     <h2 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:1rem;color:var(--white)">Links to third-party sites</h2>
     <p style="color:var(--muted);line-height:1.9;margin-bottom:1.5rem">This website may contain links to external websites. These are provided for your convenience only. We have no control over the content of those sites and accept no responsibility for them.</p>
     <h2 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:1rem;color:var(--white)">Governing law</h2>
-    <p style="color:var(--muted);line-height:1.9;margin-bottom:1.5rem">These terms are governed by the laws of Ghana. Any disputes will be subject to the exclusive jurisdiction of the courts of Ghana.</p>
+    <p style="color:var(--muted);line-height:1.9;margin-bottom:1.5rem">These terms are governed by the laws of England and Wales. Any disputes will be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
     <h2 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:1rem;color:var(--white)">Changes to these terms</h2>
     <p style="color:var(--muted);line-height:1.9;margin-bottom:2rem">We may update these terms from time to time. Continued use of the website after any changes constitutes your acceptance of the new terms. Please check this page periodically.</p>
     <h2 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:1rem;color:var(--white)">Contact</h2>
-    <p style="color:var(--muted);line-height:1.9;margin-bottom:3rem">Questions about these terms? Email us at <a href="mailto:hello@coratechai.com" style="color:var(--muted)">hello@coratechai.com</a>.</p>
+    <p style="color:var(--muted);line-height:1.9;margin-bottom:3rem">Questions about these terms? Email us at <a href="/cdn-cgi/l/email-protection#036b666f6f6c43606c71627766606b626a2d606c6e" style="color:var(--cyan)"><span class="__cf_email__" data-cfemail="d0b8b5bcbcbf90b3bfa2b1a4b5b3b8b1b9feb3bfbd">[email&#160;protected]</span></a>.</p>
     <button class="btn-secondary" onclick="history.back()||showPage('home')">Back</button>
   </div>
 </div>
@@ -1411,7 +1656,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
         <div class="form-group"><label>Email Address <span style="color:var(--cyan)">*</span></label><input type="email" placeholder="Your email" id="bEmail"/></div>
         <div class="form-group"><label>Phone Number <span style="color:var(--cyan)">*</span></label><input type="tel" placeholder="Your phone number" id="bPhone"/></div>
         <div class="form-group"><label>What would you like to discuss? <span style="color:var(--cyan)">*</span></label><textarea placeholder="Give us a brief idea of what you're working on or what you'd like help with..." id="bMessage" style="min-height:90px;resize:none"></textarea></div>
-        <div class="g-recaptcha" data-sitekey="6Le6eq8sAAAAAKeWBlhXBGc7BNeCG_U822GLVdrR" style="margin:.75rem 0" id="bookingCaptcha"></div>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAABkMYinukE8nw9F" style="margin:.75rem 0" id="bookingTurnstile"></div>
         <button class="btn-primary" id="confirmBookingBtn" style="width:100%;justify-content:center;margin-top:.5rem" onclick="confirmBooking()">Confirm Booking</button>
       </div>
     </div>
@@ -1522,7 +1767,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
     </div>
     <div class="footer-col">
       <h4>Get in Touch</h4>
-      <a href="mailto:hello@coratechai.com" style="color:var(--muted)">hello@coratechai.com</a>
+      <a href="/cdn-cgi/l/email-protection#234b464f4f4c63404c51425746404b424a0d404c4e"><span class="__cf_email__" data-cfemail="cca4a9a0a0a38cafa3beadb8a9afa4ada5e2afa3a1">[email&#160;protected]</span></a>
       <a href="#" onclick="openBooking();return false">Book a Discovery Call</a>
     </div>
   </div>
@@ -1538,15 +1783,31 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5% 
 </footer>
 
 
-
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // NAV SCROLL
 window.addEventListener('scroll',function(){
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>20);
 });
 
 // MOBILE MENU
-function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+function toggleMenu(){
+  var menu=document.getElementById('mobileMenu');
+  var btn=document.getElementById('hamburgerBtn');
+  var isOpen=menu.classList.contains('open');
+  if(isOpen){closeMobileMenu();}
+  else{
+    menu.classList.add('open');
+    document.body.classList.add('menu-open');
+    if(btn){btn.classList.add('open');btn.setAttribute('aria-expanded','true');}
+  }
+}
+function closeMobileMenu(){
+  var menu=document.getElementById('mobileMenu');
+  var btn=document.getElementById('hamburgerBtn');
+  menu.classList.remove('open');
+  document.body.classList.remove('menu-open');
+  if(btn){btn.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+}
 
 // SPA ROUTING
 function showPage(id){
@@ -1579,8 +1840,6 @@ function selectStage(i){
   document.querySelectorAll('.rm-step').forEach(function(s,idx){s.classList.toggle('active',idx===i);});
   el.innerHTML='<h3>'+stageData[i].title+'</h3><p>'+stageData[i].body+'</p>';
 }
-if(document.getElementById('rmContent'))selectStage(0);
-
 if(document.getElementById('rmContent'))selectStage(0);
 
 // INDUSTRY DATA
@@ -1747,95 +2006,50 @@ function confirmBooking(){
   if(!n||!e||!p||!m){alert('Please fill in all required fields.');return;}
   if(!selectedDay||!selectedTime){alert('Please select a date and time.');return;}
 
-  // Check reCAPTCHA
-  var cap='';
-  try{cap=grecaptcha.getResponse();}catch(ex){}
-  if(!cap){alert('Please complete the reCAPTCHA verification.');return;}
-
+  // Send email notification via EmailJS or fallback mailto
   var typeNames=['Intro Call (15 min)','Discovery Call (30 min)','Strategy Session (60 min)'];
-  var btn=document.getElementById('confirmBookingBtn');
-  if(btn){btn.disabled=true;btn.textContent='Booking...';}
+  var subject=encodeURIComponent('New Booking Request — '+typeNames[selectedType]);
+  var body=encodeURIComponent(
+    'NEW BOOKING REQUEST\n\n'+
+    'Session Type: '+typeNames[selectedType]+'\n'+
+    'Date: '+monthNames[calMonth2]+' '+selectedDay+', '+calYear+'\n'+
+    'Time: '+selectedTime+'\n\n'+
+    'Name: '+n+'\n'+
+    'Email: '+e+'\n'+
+    'Phone: '+p+'\n\n'+
+    'Message:\n'+m
+  );
+  // Open mailto as the notification mechanism (works without a backend)
+  var mailtoLink='mailto:hello@coratechai.com?subject='+subject+'&body='+body;
+  var a=document.createElement('a');a.href=mailtoLink;a.style.display='none';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
 
-  fetch('https://formspree.io/f/xgopjwlv',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({
-      _subject:'New Booking: '+typeNames[selectedType]+' — '+n,
-      _replyto:e,
-      form_type:'Booking Request',
-      session_type:typeNames[selectedType],
-      preferred_date:monthNames[calMonth2]+' '+selectedDay+', '+calYear,
-      preferred_time:selectedTime,
-      name:n,
-      email:e,
-      phone:p,
-      message:m
-    })
-  })
-  .then(function(r){return r.json();})
-  .then(function(){
-    document.getElementById('bookingForm').style.display='none';
-    document.getElementById('bookingConfirm').style.display='block';
-    try{grecaptcha.reset();}catch(ex){}
-  })
-  .catch(function(){
-    // Fallback: mailto if Formspree unavailable
-    var subj=encodeURIComponent('Booking: '+typeNames[selectedType]+' — '+n);
-    var body=encodeURIComponent('Session: '+typeNames[selectedType]+'\nDate: '+monthNames[calMonth2]+' '+selectedDay+', '+calYear+'\nTime: '+selectedTime+'\nName: '+n+'\nEmail: '+e+'\nPhone: '+p+'\nMessage: '+m);
-    window.open('mailto:hello@coratechai.com?subject='+subj+'&body='+body);
-    document.getElementById('bookingForm').style.display='none';
-    document.getElementById('bookingConfirm').style.display='block';
-  })
-  .finally(function(){
-    if(btn){btn.disabled=false;btn.textContent='Confirm Booking';}
-  });
+  document.getElementById('bookingForm').style.display='none';
+  document.getElementById('bookingConfirm').style.display='block';
 }
 
-// CONTACT FORM — submits via Formspree to hello@coratechai.com
+// CONTACT FORM
 function submitContact2(){
   var n=document.getElementById('cName2').value.trim();
   var e=document.getElementById('cEmail2').value.trim();
   var m=document.getElementById('cMessage2').value.trim();
-  var c=document.getElementById('cCompany2')?document.getElementById('cCompany2').value.trim():'';
   if(!n||!e||!m){alert('Please fill in all required fields.');return;}
 
-  // Check reCAPTCHA
-  var cap='';
-  try{cap=grecaptcha.getResponse();}catch(ex){}
-  if(!cap){alert('Please tick the reCAPTCHA box to confirm you are not a robot.');return;}
+  // Send email notification via mailto
+  var subject=encodeURIComponent('New Enquiry from '+n+' — Coratech AI Website');
+  var body=encodeURIComponent(
+    'NEW WEBSITE ENQUIRY\n\n'+
+    'Name: '+n+'\n'+
+    'Email: '+e+'\n'+
+    'Company: '+(document.getElementById('cCompany2').value.trim()||'Not provided')+'\n\n'+
+    'Message:\n'+m
+  );
+  var mailtoLink='mailto:hello@coratechai.com?subject='+subject+'&body='+body;
+  var a=document.createElement('a');a.href=mailtoLink;a.style.display='none';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
 
-  var btn=document.querySelector('[onclick="submitContact2()"]');
-  if(btn){btn.disabled=true;btn.textContent='Sending...';}
-
-  fetch('https://formspree.io/f/xqapzone',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({
-      _subject:'New Enquiry from '+n+' — Coratech AI',
-      _replyto:e,
-      form_type:'Contact Form',
-      name:n,
-      email:e,
-      company:c||'Not provided',
-      message:m
-    })
-  })
-  .then(function(r){return r.json();})
-  .then(function(){
-    document.getElementById('formSuccess2').style.display='block';
-    ['cName2','cEmail2','cMessage2','cCompany2'].forEach(function(id){
-      var el=document.getElementById(id);if(el)el.value='';
-    });
-    try{grecaptcha.reset();}catch(ex){}
-  })
-  .catch(function(){
-    // Fallback
-    window.open('mailto:hello@coratechai.com?subject='+encodeURIComponent('Enquiry from '+n)+'&body='+encodeURIComponent('Name: '+n+'\nEmail: '+e+'\nMessage: '+m));
-    document.getElementById('formSuccess2').style.display='block';
-  })
-  .finally(function(){
-    if(btn){btn.disabled=false;btn.textContent='Send Message';}
-  });
+  document.getElementById('formSuccess2').style.display='block';
+  ['cName2','cEmail2','cMessage2','cCompany2'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
 }
 
 // FAQ TOGGLE
@@ -2097,11 +2311,9 @@ function cbSubmitLead(){
       _subject:(isHuman?'Chatbot: Talk to Person — ':'Chatbot: Booking Request — ')+n,
       _replyto:e,
       form_type:isHuman?'Talk to Person':'Chatbot Booking',
-      name:n,
-      email:e,
-      phone:p
+      name:n,email:e,phone:p
     })
-  }).catch(function(){/* silent fail - message still shown */});
+  }).catch(function(){});
 
   cbAddMsg("Thank you, "+n+". We've got your details and someone will be in touch at "+e+" or "+p+" very soon.",'bot');
   setTimeout(function(){cbAddNewChatBtn();},400);
