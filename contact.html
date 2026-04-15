@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contact — Coratech AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="stylesheet" href="../css/styles.css"/>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="section-label">Contact Us</div>
+  <h1>Start the <span class="hl">Conversation</span></h1>
+  <p>Take the first step to working smarter with AI and Automation. No hard sell. Just a genuine conversation about what's possible.</p>
+</div>
+
+<section>
+  <div class="contact-grid">
+    <div class="form-wrap">
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem">Reach Us</h3>
+      <div class="ci-row">
+        <span class="ci-icon"><span class="material-symbols-outlined" style="font-size:1.4rem;color:var(--cyan)">mail</span></span>
+        <div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:hello@coratechai.com" style="color:var(--muted)"><span class="__cf_email__" data-cfemail="d4bcb1b8b8bb94b7bba6b5a0b1b7bcb5bdfab7bbb9">hello@coratechai.com</span></a></div></div>
+      </div>
+      <div class="ci-row">
+        <span class="ci-icon"><span class="material-symbols-outlined" style="font-size:1.4rem;color:var(--cyan)">phone</span></span>
+        <div>
+          <div class="ci-label">WhatsApp / Phone</div>
+          <div class="ci-val">Ghana: <a href="https://wa.me/233536026175" style="color:var(--muted)">+233 536 026 175</a></div>
+          <div class="ci-val">UK: <a href="https://wa.me/447832956639" style="color:var(--muted)">+44 7832 956 639</a></div>
+        </div>
+      </div>
+      <div class="ci-row">
+        <span class="ci-icon"><span class="material-symbols-outlined" style="font-size:1.4rem;color:var(--cyan)">calendar_month</span></span>
+        <div>
+          <div class="ci-label">Book a Discovery Call</div>
+          <div class="ci-val">Free 30-minute session — no hard sell, just an honest conversation about what's possible for your business.</div>
+        </div>
+      </div>
+      <div style="margin-top:2rem">
+        <button class="btn-primary" onclick="openBooking()">Book a Free Discovery Call</button>
+      </div>
+    </div>
+
+    <div class="form-wrap ">
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.5rem">Send a Message</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Your Name <span style="color:var(--cyan)">*</span></label><input type="text" placeholder="Your name" id="cName2" required/></div>
+        <div class="form-group"><label>Company Name</label><input type="text" placeholder="Your company" id="cCompany2"/></div>
+      </div>
+      <div class="form-group"><label>Email Address <span style="color:var(--cyan)">*</span></label><input type="email" placeholder="your@email.com" id="cEmail2" required/></div>
+      <div class="form-group"><label>Message <span style="color:var(--cyan)">*</span></label><textarea placeholder="Describe your enquiry or goal" id="cMessage2" required></textarea></div>
+      <div class="g-recaptcha" data-sitekey="6Le6eq8sAAAAAKeWBlhXBGc7BNeCG_U822GLVdrR" style="margin-bottom:1rem;transform:scale(0.9);transform-origin:left top"></div>
+      <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitContact2()">Send Message →</button>
+      <div class="form-success" id="formSuccess2">Message sent — thank you! We'll be in touch shortly.

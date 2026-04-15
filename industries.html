@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Industries — Coratech AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="stylesheet" href="../css/styles.css"/>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="section-label">Industries</div>
+  <h1>AI Solutions by <span class="hl">Industry</span></h1>
+  <p>We bring sector-specific expertise to every engagement — understanding the unique challenges, regulations, and opportunities in your industry.</p>
+</div>
+
+<div class="industries-grid">
+  <div class="industry-card fade-in stagger-1" onclick="showIndustry('retail')">
+    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80" alt="Retail"/>
+    <div class="ind-overlay"></div>
+    <div class="ind-body"><div class="ind-icon-wrap"><span class="material-symbols-outlined" style="font-size:1.2rem;color:#fff">shopping_bag</span></div><h3>Retail &amp; eCommerce</h3><p>Personalisation, demand forecasting, AI customer service, and inventory optimisation.</p></div>
+  </div>
+  <div class="industry-card fade-in stagger-2" onclick="showIndustry('healthcare')">
+    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&q=80" alt="Healthcare"/>
+    <div class="ind-overlay"></div>
+    <div class="ind-body"><div class="ind-icon-wrap"><span class="material-symbols-outlined" style="font-size:1.2rem;color:#fff">local_hospital</span></div><h3>Healthcare</h3><p>Clinical decision support, scheduling AI, document automation, and patient risk scoring.</p></div>
+  </div>
+  <div class="industry-card fade-in stagger-3" onclick="showIndustry('finance')">
+    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80" alt="Finance"/>
+    <div class="ind-overlay"></div>
+    <div class="ind-body"><div class="ind-icon-wrap"><span class="material-symbols-outlined" style="font-size:1.2rem;color:#fff">account_balance</span></div><h3>Finance</h3><p>Risk modelling, fraud detection, algorithmic support, and regulatory AI.</p></div>
+  </div>
+  <div class="industry-card fade-in stagger-4" onclick="showIndustry('legal')">
+    <img src="https://images.pexels.com/photos/8730785/pexels-photo-8730785.jpeg" alt="Legal"/>
+    <div class="ind-overlay"></div>
+    <div class="ind-body"><div class="ind-icon-wrap"><span class="material-symbols-outlined" style="font-size:1.2rem;color:#fff">gavel</span></div><h3>Legal</h3><p>Document review automation, contract intelligence, due diligence AI, and compliance monitoring.</p></div>
+  </div>
+  <div class="industry-card fade-in stagger-5" onclick="showIndustry('agriculture')">
+    <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=700&q=80" alt="Agriculture"/>
+    <div class="ind-overlay"></div>
+    <div class="ind-body"><div class="ind-icon-wrap"><span class="material-symbols-outlined" style="font-size:1.2rem;color:#fff">eco</span></div><h3>Agriculture</h3><p>Crop yield prediction, soil analysis AI, supply chain optimisation, and smart irrigation.</p></div>
+  </div>
+  <div class="industry-card fade-in stagger-1" onclick="showIndustry('education')">
+    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=700&q=80" alt="Education"/>
+    <div class="ind-overlay"></div>
+    <div class="ind-body"><div class="ind-icon-wrap"><span class="material-symbols-outlined" style="font-size:1.2rem;color:#fff">school</span></div><h3>Education</h3><p>Adaptive learning, student success prediction, content generation, and admin AI.</p></div>
+  </div>
+</div>
+
+<div class="industry-detail" id="industryDetail"></div>
+
+<section style="padding-top:0">
+  <div class="cta-band fade-in" id="industryCta">
+    <h2>Don't see your sector? <span style="color:var(--cyan)">Let's talk.</span></h2>
+    <p>We work across all industries. Book a free call and we'll show you what's possible for your business.</p>
+    <button class="btn-primary" onclick="openBooking()">Book a Free Discovery Call</button>
+  </div>
+</section>
+
+<script src="../js/main.js"></script>
+<script src="../js/components.js"></script>
+</body>
+</html>

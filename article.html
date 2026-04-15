@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Article — Coratech AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="stylesheet" href="../css/styles.css"/>
+</head>
+<body>
+
+<div class="article-hero">
+  <button class="article-back" onclick="goBack()">← Back to Insights</button>
+  <div class="article-tag" id="articleTag">Leadership</div>
+  <h1 id="articleTitle">Loading article...</h1>
+  <div class="article-meta">
+    <span><span class="material-symbols-outlined" style="font-size:1rem">schedule</span> <span id="articleReadTime"></span></span>
+    <span><span class="material-symbols-outlined" style="font-size:1rem">calendar_today</span> <span id="articleDate"></span></span>
+  </div>
+</div>
+
+<div class="article-body" id="articleBody"></div>
+
+<section style="padding-top:0;padding-bottom:4rem">
+  <div class="cta-band fade-in">
+    <h2>Ready to explore <span style="color:var(--cyan)">AI for your business</span>?</h2>
+    <p>Book a free discovery call and we'll identify the best AI opportunities for you.</p>
+    <button class="btn-primary" onclick="openBooking()">Book a Free Discovery Call</button>
+  </div>
+</section>
+
+<script src="../js/main.js"></script>
+<script src="../js/components.js"></script>
+<script>
+function goBack(){
+  var params = new URLSearchParams(window.location.search);
+  var from = params.get('from') || 'insights.html';
+  window.location.href = from;
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  var params = new URLSearchParams(window.location.search);
+  var slug = params.get('slug');
+  if(!slug || !insightArticles[slug]){
+    document.getElementById('articleTitle').textContent = 'Article not found';
+    return;
+  }
+  var a = insightArticles[slug];
+  document.title = a.title + ' — Coratech AI';
+  document.getElementById('articleTag').textContent = a.tag;
+  document.getElementById('articleTitle').textContent = a.title;
+  document.getElementById('articleReadTime').textContent = a.readTime;
+  document.getElementById('articleDate').textContent = a.date;
+  document.getElementById('articleBody').innerHTML = a.body;
+});
+</script>
+</body>
+</html>
